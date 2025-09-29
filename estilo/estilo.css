@@ -1,6 +1,9 @@
 /* Datos personales: Gabriel García Martínez, UO289097 */
 /* Estilos generales del proyecto MotoGP Desktop */
+
 /* Especificidad: 001 */
 body {
     font-family: Tahoma, Verdana, Segoe, sans-serif;
+    background-color: white;
+    color: black;
 }
