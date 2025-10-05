@@ -23,7 +23,7 @@ nav a {
     color: #000000;
 }
 
-/*  */
+/* Especificidad 012 */
 nav a.active {
     color: blue;
 }
