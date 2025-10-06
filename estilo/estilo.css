@@ -11,24 +11,58 @@ body {
 /* Especificidad 001*/
 header {
     background-color: #FF8300;
+    /* No hay problema en la herencia de colores */
 }
 
-/* Especificidad 012 */
+/* Especificidad 002 */
 header a {
     color: black;
     text-decoration-line: overline;
+    /* No hay problema en la herencia de colores */
 }
 
+/* Especificidad 012 */
 header a:hover {
     text-decoration-line: underline;
+    font-size: 1.2em;
 }
 
 /* Especificidad 012 */
 nav a.active {
     color: blue;
+    /* No hay problema en la herencia de colores */
 }
 
 /* Especificidad 002*/
 header+p {
     font-size: 0.85em;
+}
+
+@media (min-width: 460px) and (max-width: 799px) {
+
+    video {
+        width: 100%;
+        height: auto;
+    }
+
+    audio {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 459px) {
+
+    header+p {
+        display: none;
+    }
+
+    video {
+        width: 100%;
+        height: auto;
+    }
+
+    audio {
+        width: 100%;
+    }
 }
