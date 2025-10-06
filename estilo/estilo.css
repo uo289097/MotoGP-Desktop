@@ -4,19 +4,20 @@
 /* Especificidad: 001 */
 body {
     font-family: Tahoma, Verdana, Segoe, sans-serif;
-    background-color: #B7AC44;
-    color: black;
+    background-color: #F5F2E7;
+    color: #222222;
 }
 
 /* Especificidad 001*/
 header {
-    background-color: #FF8300;
+    background-color: #D43F00;
+    color: #FFFFFF;
     /* No hay problema en la herencia de colores */
 }
 
 /* Especificidad 002 */
 header a {
-    color: black;
+    color: white;
     text-decoration-line: overline;
     /* No hay problema en la herencia de colores */
 }
