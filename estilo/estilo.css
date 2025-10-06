@@ -13,15 +13,14 @@ header {
     background-color: #FF8300;
 }
 
-/* Especificidad 002*/
-h1 a {
-    color: #000000;
+/* Especificidad 012 */
+header a {
+    color: black;
+    text-decoration-line: overline;
 }
 
-/* Especificidad 002*/
-nav a {
-    color: #000000;
-    text-decoration-line: overline;
+header a:hover {
+    text-decoration-line: underline;
 }
 
 /* Especificidad 012 */
@@ -30,6 +29,6 @@ nav a.active {
 }
 
 /* Especificidad 002*/
-section p {
+header+p {
     font-size: 0.85em;
 }
