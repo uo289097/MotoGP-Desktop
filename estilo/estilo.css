@@ -27,3 +27,7 @@ nav a {
 nav a.active {
     color: blue;
 }
+
+header+p {
+    font-size: 0.85em;
+}
