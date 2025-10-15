@@ -3,7 +3,7 @@
 
 <circuito>
     <nombre>Pertamina Mandalika Circuit</nombre>
-    <longitud unidad="metros">4301</longitud>
+    <longitudTotal unidad="metros">4301</longitudTotal>
     <anchura unidad="metros">15</anchura>
     <fecha dia="05/10/2025" hora="09:00"/>
     <vueltas>27</vueltas>
@@ -11,37 +11,47 @@
     <pais>Indonesia</pais>
     <patrocinador>Pertamina</patrocinador>
     <referencias>
-        <referencia ref="https://es.wikipedia.org/wiki/Circuito_Urbano_Internacional_de_Mandalika"></referencia>
-        <referencia ref="https://www.motogp.com/es/calendar/2025/event/indonesia/c4def1f2-c288-4eab-9461-7acda49e765a?tab=overview"></referencia>
-        <referencia ref="https://es.wikipedia.org/wiki/Gran_Premio_de_Indonesia_de_Motociclismo"></referencia>
+        <referencia>https://es.wikipedia.org/wiki/Circuito_Urbano_Internacional_de_Mandalika</referencia>
+        <referencia>https://www.motogp.com/es/calendar/2025/event/indonesia/c4def1f2-c288-4eab-9461-7acda49e765a?tab=overview</referencia>
+        <referencia>https://es.wikipedia.org/wiki/Gran_Premio_de_Indonesia_de_Motociclismo</referencia>
     </referencias>
     <fotografias>
-        <fotografia ruta="../multimedia/mandalika-aereo.jpg"></fotografia>
-        <fotografia ruta="../multimedia/mandalika-salida.png"></fotografia>
-        <fotografia ruta="../multimedia/joan-mir-honda-mandalika.jpg"></fotografia>
+        <fotografia>../multimedia/mandalika-aereo.jpg</fotografia>
+        <fotografia>../multimedia/mandalika-salida.png</fotografia>
+        <fotografia>../multimedia/joan-mir-honda-mandalika.jpg"</fotografia>
     </fotografias>
     <videos>
-        <video ruta="../multimedia/marquez-mandalika.mp4"></video>
-        <video ruta="../multimedia/munoz-mandalika.mp4"></video>
+        <video>../multimedia/marquez-mandalika.mp4</video>
+        <video>../multimedia/munoz-mandalika.mp4</video>
     </videos>
     <origen>
-        <punto latitud="-8.895737214085928" longitud="116.3035149881376" altitud="9.2"></punto>
+        <punto>
+            <latitud unidad="grados">-8.895737214085928</latitud>
+            <longitud unidad="grados">116.3035149881376</longitud>
+            <altitud unidad="metros">9.2</altitud>
+        </punto>
     </origen>
     <tramos>
-        <tramo name="1" metros="300" sector="1">
-            <punto latitud="-8.894507664899935" longitud="116.30796447573758" altitud="9"></punto>
+        <tramo name="1" distancia="300" unidad="metros" sector="1">
+            <punto>
+                <latitud unidad="grados">-8.894507664899935</latitud>
+                <longitud unidad="grados">116.30796447573758</longitud>
+                <altitud unidad="metros">9</altitud>
+            </punto>
         </tramo>
-        <tramo name="2" metros="15" sector="1">
-            <punto latitud="-8.894928697611606" longitud="116.30852928412536" altitud="9"></punto>
+        <tramo name="2" distancia="15" unidad="metros" sector="1">
+            <punto>
+                <latitud unidad="grados">-8.894928697611606</latitud>
+                <longitud unidad="grados">116.30852928412536</longitud>
+                <altitud unidad="metros">9</altitud>
+            </punto>
         </tramo>
-        <tramo name="3" metros="130" sector="1">
-            <punto latitud="-8.896742165402582" longitud=" 116.30855111266189" altitud="9"></punto>
-        </tramo>
-        <tramo name="4" metros="10" sector="1">
-            <punto latitud="-8.896978262792176" longitud="116.30828938072486" altitud="9"></punto>
-        </tramo>
-        <tramo name="5" metros="5" sector="1">
-            <punto latitud="-8.897015738554284" longitud="116.30793661159234" altitud="9"></punto>
+        <tramo name="3" distancia="130" unidad="metros" sector="1">
+            <punto>
+                <latitud unidad="grados">-8.896742165402582</latitud>
+                <longitud unidad="grados">116.30855111266189</longitud>
+                <altitud unidad="metros">9</altitud>
+            </punto>
         </tramo>
     </tramos>
 
