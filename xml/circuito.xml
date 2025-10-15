@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE circuito SYSTEM "circuito.dtd">
+
+<circuito>
+    <nombre>Pertamina Mandalika Circuit</nombre>
+    <longitud unidad="metros">4301</longitud>
+    <anchura unidad="metros">15</anchura>
+    <fecha dia="05/10/2025" hora="09:00"/>
+    <vueltas>27</vueltas>
+    <localidad>Mandalika</localidad>
+    <pais>Indonesia</pais>
+    <patrocinador>Pertamina</patrocinador>
+    <referencias>
+        <referencia ref="https://es.wikipedia.org/wiki/Circuito_Urbano_Internacional_de_Mandalika"></referencia>
+        <referencia ref="https://www.motogp.com/es/calendar/2025/event/indonesia/c4def1f2-c288-4eab-9461-7acda49e765a?tab=overview"></referencia>
+        <referencia ref="https://es.wikipedia.org/wiki/Gran_Premio_de_Indonesia_de_Motociclismo"></referencia>
+    </referencias>
+    <fotografias>
+        <fotografia ruta="../multimedia/mandalika-aereo.jpg"></fotografia>
+        <fotografia ruta="../multimedia/mandalika-salida.png"></fotografia>
+        <fotografia ruta="../multimedia/joan-mir-honda-mandalika.jpg"></fotografia>
+    </fotografias>
+    <videos>
+        <video ruta="../multimedia/marquez-mandalika.mp4"></video>
+        <video ruta="../multimedia/munoz-mandalika.mp4"></video>
+    </videos>
+    <origen>
+        <punto latitud="-8.895737214085928" longitud="116.3035149881376" altitud="9.2"></punto>
+    </origen>
+    <tramos>
+        <tramo name="1" metros="300" sector="1">
+            <punto latitud="-8.894507664899935" longitud="116.30796447573758" altitud="9"></punto>
+        </tramo>
+        <tramo name="2" metros="15" sector="1">
+            <punto latitud="-8.894928697611606" longitud="116.30852928412536" altitud="9"></punto>
+        </tramo>
+        <tramo name="3" metros="130" sector="1">
+            <punto latitud="-8.896742165402582" longitud=" 116.30855111266189" altitud="9"></punto>
+        </tramo>
+        <tramo name="4" metros="10" sector="1">
+            <punto latitud="-8.896978262792176" longitud="116.30828938072486" altitud="9"></punto>
+        </tramo>
+        <tramo name="5" metros="5" sector="1">
+            <punto latitud="-8.897015738554284" longitud="116.30793661159234" altitud="9"></punto>
+        </tramo>
+    </tramos>
+
+    <vencedor duracion="41:07.651">F.Aldeguer</vencedor>
+    <clasificacion>
+        <piloto posicion="1" puntos="545">Marc Márquez</piloto>
+        <piloto posicion="2" puntos="362">Álex Márquez</piloto>
+        <piloto posicion="3" puntos="274">Pecco Bagnaia</piloto>
+    </clasificacion>
+</circuito>
