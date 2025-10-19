@@ -24,7 +24,6 @@ vencedor, clasificacion)>
 <!ELEMENT altitud (#PCDATA)>
 <!ELEMENT tramos (tramo+)>
 <!ELEMENT tramo (punto+)>
-
 <!ELEMENT vencedor (#PCDATA)>
 <!ELEMENT clasificacion (piloto+)>
 
@@ -42,3 +41,6 @@ vencedor, clasificacion)>
 <!ATTLIST vencedor duracion CDATA #REQUIRED>
 <!ATTLIST piloto posicion CDATA #REQUIRED>
 <!ATTLIST piloto puntos CDATA #REQUIRED>
+<!ATTLIST referencia alt CDATA #REQUIRED>
+<!ATTLIST fotografia alt CDATA #REQUIRED>
+<!ATTLIST video alt CDATA #REQUIRED>

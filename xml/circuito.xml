@@ -5,24 +5,29 @@
     <nombre>Pertamina Mandalika Circuit</nombre>
     <longitudTotal unidad="metros">4301</longitudTotal>
     <anchura unidad="metros">15</anchura>
-    <fecha dia="05/10/2025" hora="09:00"/>
+    <fecha dia="05/10/2025" hora="09:00" />
     <vueltas>27</vueltas>
     <localidad>Mandalika</localidad>
     <pais>Indonesia</pais>
     <patrocinador>Pertamina</patrocinador>
     <referencias>
-        <referencia>https://es.wikipedia.org/wiki/Circuito_Urbano_Internacional_de_Mandalika</referencia>
-        <referencia>https://www.motogp.com/es/calendar/2025/event/indonesia/c4def1f2-c288-4eab-9461-7acda49e765a?tab=overview</referencia>
-        <referencia>https://es.wikipedia.org/wiki/Gran_Premio_de_Indonesia_de_Motociclismo</referencia>
+        <referencia alt="Wikipedia del circuito de Mandalika">
+            https://es.wikipedia.org/wiki/Circuito_Urbano_Internacional_de_Mandalika</referencia>
+        <referencia alt="Página oficial de MotoGP del circuito de Mandalika">
+            https://www.motogp.com/es/calendar/2025/event/indonesia/c4def1f2-c288-4eab-9461-7acda49e765a?tab=overview</referencia>
+        <referencia alt="Wikipedia del Gran Premio de Indonesia">
+            https://es.wikipedia.org/wiki/Gran_Premio_de_Indonesia_de_Motociclismo</referencia>
     </referencias>
     <fotografias>
-        <fotografia>../multimedia/mandalika-aereo.jpg</fotografia>
-        <fotografia>../multimedia/mandalika-salida.png</fotografia>
-        <fotografia>../multimedia/joan-mir-honda-mandalika.jpg"</fotografia>
+        <fotografia alt="Plano aéreo del circuito de Mandalika">../multimedia/mandalika-aereo.jpg</fotografia>
+        <fotografia alt="Salida de carrera de MotoGP en Mandalika">
+            ../multimedia/mandalika-salida.png</fotografia>
+        <fotografia alt="Joan Mir en el circuito de Mandalika">
+            ../multimedia/joan-mir-honda-mandalika.jpg"</fotografia>
     </fotografias>
     <videos>
-        <video>../multimedia/marquez-mandalika.mp4</video>
-        <video>../multimedia/munoz-mandalika.mp4</video>
+        <video alt="Caída Marc Márquez en Mandalika">../multimedia/marquez-mandalika.mp4</video>
+        <video alt="Caída Muñoz en Mandalika">../multimedia/munoz-mandalika.mp4</video>
     </videos>
     <origen>
         <punto>
