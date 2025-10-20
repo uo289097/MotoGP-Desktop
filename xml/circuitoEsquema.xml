@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<circuito xmlns="http://www.uniovi.es" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.uniovi.es circuito.xsd">
+    <nombre>Pertamina Mandalika Circuit</nombre>
+    <longitudTotal unidad="metros">4301</longitudTotal>
+    <anchura unidad="metros">15</anchura>
+    <fecha>2025-10-05T09:00:00</fecha>
+    <vueltas>27</vueltas>
+    <localidad>Mandalika</localidad>
+    <pais>Indonesia</pais>
+    <patrocinador>Pertamina</patrocinador>
+    <referencias>
+        <referencia alt="Wikipedia del circuito de Mandalika">
+            https://es.wikipedia.org/wiki/Circuito_Urbano_Internacional_de_Mandalika</referencia>
+        <referencia alt="Página oficial de MotoGP del circuito de Mandalika">
+            https://www.motogp.com/es/calendar/2025/event/indonesia/c4def1f2-c288-4eab-9461-7acda49e765a?tab=overview</referencia>
+        <referencia alt="Wikipedia del Gran Premio de Indonesia">
+            https://es.wikipedia.org/wiki/Gran_Premio_de_Indonesia_de_Motociclismo</referencia>
+    </referencias>
+    <fotografias>
+        <fotografia alt="Plano aéreo del circuito de Mandalika">../multimedia/mandalika-aereo.jpg</fotografia>
+        <fotografia alt="Salida de carrera de MotoGP en Mandalika">
+            ../multimedia/mandalika-salida.png</fotografia>
+        <fotografia alt="Joan Mir en el circuito de Mandalika">
+            ../multimedia/joan-mir-honda-mandalika.jpg"</fotografia>
+    </fotografias>
+    <videos>
+        <video alt="Caída Marc Márquez en Mandalika">../multimedia/marquez-mandalika.mp4</video>
+        <video alt="Caída Muñoz en Mandalika">../multimedia/munoz-mandalika.mp4</video>
+    </videos>
+    <origen>
+        <punto>
+            <latitud unidad="grados">-8.895737214085928</latitud>
+            <longitud unidad="grados">116.3035149881376</longitud>
+            <altitud unidad="metros">9.2</altitud>
+        </punto>
+    </origen>
+    <tramos>
+        <tramo name="1" distancia="300" unidad="metros" sector="1">
+            <punto>
+                <latitud unidad="grados">-8.894507664899935</latitud>
+                <longitud unidad="grados">116.30796447573758</longitud>
+                <altitud unidad="metros">9</altitud>
+            </punto>
+        </tramo>
+        <tramo name="2" distancia="15" unidad="metros" sector="1">
+            <punto>
+                <latitud unidad="grados">-8.894928697611606</latitud>
+                <longitud unidad="grados">116.30852928412536</longitud>
+                <altitud unidad="metros">9</altitud>
+            </punto>
+        </tramo>
+        <tramo name="3" distancia="130" unidad="metros" sector="1">
+            <punto>
+                <latitud unidad="grados">-8.896742165402582</latitud>
+                <longitud unidad="grados">116.30855111266189</longitud>
+                <altitud unidad="metros">9</altitud>
+            </punto>
+        </tramo>
+    </tramos>
+
+    <vencedor duracion="PT41M07S">F.Aldeguer</vencedor>
+    <clasificacion>
+        <piloto posicion="1" puntos="545">Marc Márquez</piloto>
+        <piloto posicion="2" puntos="362">Álex Márquez</piloto>
+        <piloto posicion="3" puntos="274">Pecco Bagnaia</piloto>
+    </clasificacion>
+</circuito>

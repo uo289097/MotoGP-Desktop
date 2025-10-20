@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns="http://tempuri.org/circuito" elementFormDefault="qualified" targetNamespace="http://tempuri.org/circuito" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns="http://www.uniovi.es" elementFormDefault="qualified" 
+targetNamespace="http://www.uniovi.es" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:element name="circuito">
-		<xs:complexType>
+		<xs:complexType> 
 			<xs:sequence>
 				<xs:element minOccurs="1" maxOccurs="1" ref="nombre" />
 				<xs:element minOccurs="1" maxOccurs="1" ref="longitudTotal" />
@@ -40,17 +42,16 @@
 			</xs:simpleContent>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="fecha">
-		<xs:complexType>
-			<xs:simpleContent>
-				<xs:extension base="xs:string">
-					<xs:attribute name="dia" type="xs:string" use="required" />
-					<xs:attribute name="hora" type="xs:string" use="required" />
-				</xs:extension>
-			</xs:simpleContent>
-		</xs:complexType>
+	<xs:element name="fecha" type="xs:dateTime">
 	</xs:element>
-	<xs:element name="vueltas" type="xs:integer" />
+	<xs:element name="vueltas">
+        <xs:simpleType>
+            <xs:restriction base="xs:integer">
+            <xs:minInclusive value="20"/>
+            <xs:maxInclusive value="40"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
 	<xs:element name="localidad" type="xs:string" />
 	<xs:element name="pais" type="xs:string" />
 	<xs:element name="patrocinador" type="xs:string" />
@@ -58,9 +59,23 @@
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
-					<xs:attribute name="posicion" type="xs:integer" use="required" />
-					<xs:attribute name="puntos" type="xs:integer" use="required" />
-				</xs:extension>
+					<xs:attribute name="posicion" use="required" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:integer">
+                                <xs:minInclusive value="1"/>
+                                <xs:maxInclusive value="3"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+					<xs:attribute name="puntos" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:integer">
+                                <xs:minInclusive value="0"/>
+                                <xs:maxInclusive value="700"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
 			</xs:simpleContent>
 		</xs:complexType>
 	</xs:element>
@@ -129,32 +144,50 @@
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="latitud">
-		<xs:complexType>
-			<xs:simpleContent>
-				<xs:extension base="xs:float">
-					<xs:attribute name="unidad" type="xs:string" use="required" />
-				</xs:extension>
-			</xs:simpleContent>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="longitud">
-		<xs:complexType>
-			<xs:simpleContent>
-				<xs:extension base="xs:float">
-					<xs:attribute name="unidad" type="xs:string" use="required" />
-				</xs:extension>
-			</xs:simpleContent>
-		</xs:complexType>
-	</xs:element>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="latitudRest">
+                    <xs:attribute name="unidad" type="xs:string" use="required" />
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="latitudRest">
+        <xs:restriction base="xs:float">
+          <xs:minInclusive value="-90.0" />
+          <xs:maxInclusive value="90.0" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="longitud">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="longitudRest">
+                    <xs:attribute name="unidad" type="xs:string" use="required" />
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="longitudRest">
+        <xs:restriction base="xs:float">
+          <xs:minInclusive value="-180.0" />
+          <xs:maxInclusive value="180.0" />
+        </xs:restriction>
+    </xs:simpleType>
 	<xs:element name="altitud">
 		<xs:complexType>
 			<xs:simpleContent>
-				<xs:extension base="xs:float">
+				<xs:extension base="altitudRest">
 					<xs:attribute name="unidad" type="xs:string" use="required" />
 				</xs:extension>
 			</xs:simpleContent>
 		</xs:complexType>
 	</xs:element>
+    <xs:simpleType name="altitudRest">
+        <xs:restriction base="xs:float">
+          <xs:minInclusive value="0.0" />
+          <xs:maxInclusive value="4500.0" />
+        </xs:restriction>
+    </xs:simpleType>
 	<xs:element name="tramos">
 		<xs:complexType>
 			<xs:sequence>
@@ -168,9 +201,23 @@
 				<xs:element minOccurs="1" maxOccurs="1" ref="punto" />
 			</xs:sequence>
 			<xs:attribute name="name" type="xs:string" use="required" />
-			<xs:attribute name="distancia" type="xs:double" use="required" />
+			<xs:attribute name="distancia" use="required" >
+                <xs:simpleType>
+                    <xs:restriction base="xs:double">
+                        <xs:minInclusive value="0.0"/>
+                        <xs:maxInclusive value="1500.0"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
 			<xs:attribute name="unidad" type="xs:string" use="required" />
-			<xs:attribute name="sector" type="xs:integer" use="required" />
+			<xs:attribute name="sector" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:integer">
+                        <xs:minInclusive value="1"/>
+                        <xs:maxInclusive value="3"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="vencedor">
