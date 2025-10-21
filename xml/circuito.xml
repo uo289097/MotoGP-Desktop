@@ -37,25 +37,24 @@
         </punto>
     </origen>
     <tramos>
-    <!--Revisar los 5 primeros-->
         <tramo name="1" distancia="495.53" unidad="metros" sector="1">
             <punto>
-                <latitud unidad="grados">-8.894526</latitud>
-                <longitud unidad="grados">116.307855</longitud>
+                <latitud unidad="grados">-8.8945262</latitud>
+                <longitud unidad="grados">116.3078549</longitud>
                 <altitud unidad="metros">8.5</altitud>
             </punto>
         </tramo>
         <tramo name="2" distancia="86.82" unidad="metros" sector="1">
             <punto>
-                <latitud unidad="grados">-8.894930</latitud>
-                <longitud unidad="grados">116.308532</longitud>
+                <latitud unidad="grados">-8.8949304</latitud>
+                <longitud unidad="grados">116.3085321</longitud>
                 <altitud unidad="metros">8.2</altitud>
             </punto>
         </tramo>
         <tramo name="3" distancia="182.76" unidad="metros" sector="1">
             <punto>
-                <latitud unidad="grados">-8.896583</latitud>
-                <longitud unidad="grados">116.308565</longitud>
+                <latitud unidad="grados">-8.8965826</latitud>
+                <longitud unidad="grados">116,3085648</longitud>
                 <altitud unidad="metros">7.7</altitud>
             </punto>
         </tramo>
