@@ -30,7 +30,7 @@ header a:hover {
 
 /* Especificidad 012 */
 nav a.active {
-    color: #FFD166;
+    color: #003366;
     /* No hay problema en la herencia de colores */
 }
 
