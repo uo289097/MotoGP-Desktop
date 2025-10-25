@@ -31,8 +31,8 @@
     </videos>
     <origen>
         <punto>
-            <latitud unidad="grados">-8.895737214085928</latitud>
-            <longitud unidad="grados">116.3035149881376</longitud>
+            <latitud unidad="grados">-8.8957128</latitud>
+            <longitud unidad="grados">116.3035131</longitud>
             <altitud unidad="metros">9.2</altitud>
         </punto>
     </origen>
@@ -54,7 +54,7 @@
         <tramo name="3" distancia="182.76" unidad="metros" sector="1">
             <punto>
                 <latitud unidad="grados">-8.8965826</latitud>
-                <longitud unidad="grados">116,3085648</longitud>
+                <longitud unidad="grados">116.3085648</longitud>
                 <altitud unidad="metros">7.7</altitud>
             </punto>
         </tramo>
@@ -201,7 +201,7 @@
         <tramo name="24" distancia="215.27" unidad="metros" sector="4">
             <punto>
                 <latitud unidad="grados">-8.8946806</latitud>
-                <longitud unidad="grados">116,3008489</longitud>
+                <longitud unidad="grados">116.3008489</longitud>
                 <altitud unidad="metros">8</altitud>
             </punto>
         </tramo>
