@@ -18,7 +18,7 @@ vencedor, clasificacion)>
 <!ELEMENT videos (video+)>
 <!ELEMENT video (#PCDATA)>
 <!ELEMENT origen (punto)>
-<!ELEMENT punto (latitud, longitud, altitud)>
+<!ELEMENT punto (longitud, latitud, altitud)>
 <!ELEMENT latitud (#PCDATA)>
 <!ELEMENT longitud (#PCDATA)>
 <!ELEMENT altitud (#PCDATA)>

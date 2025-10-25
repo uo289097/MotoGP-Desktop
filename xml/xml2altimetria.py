@@ -148,10 +148,10 @@ def generaSVG(archivoXML):
     for x, y in puntos_svg:
         puntos_string += ("{0},{1} ".format(x, y))
         
-    altura_base = 15 
-    x_inicio = int(puntos_svg[0][0])
-    x_final = int(puntos_svg[-1][0])
-    puntos_string += f"{x_final},{altura_base} {x_inicio},{altura_base} {x_inicio},{int(puntos_svg[0][1])}"
+    baseAltura = 20 
+    xMin = int(puntos_svg[0][0])
+    xMax = int(puntos_svg[-1][0])
+    puntos_string += f"{xMax},{baseAltura} {xMin},{baseAltura} {xMin},{int(puntos_svg[0][1])}"
 
     altimetriaSvg = Svg()
     altimetriaSvg.addPolyline(puntos_string.strip(), 
