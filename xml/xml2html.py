@@ -19,7 +19,7 @@ class Html():
         """
         Añade un encabezado <h1>, <h2>, etc.
         """
-        if nivel < 1:
+        if nivel < 1: 
             nivel = 1
         if nivel > 6:
             nivel = 6
@@ -49,6 +49,11 @@ class Html():
         """
         enlace = ET.SubElement(self.body, 'a', href=url)
         enlace.text = texto
+
+    def addList(self, elementos, tipo="ul"):
+        lista = ET.SubElement(self.body, tipo)
+        for item in elementos:
+            ET.SubElement(lista, 'li').text = item
     
     def ver(self):
         """
@@ -75,9 +80,15 @@ class Html():
         """
         Escribe el archivo HTML con indentación
         """
-        arbol = ET.ElementTree(self.raiz)
-        ET.indent(arbol)
-        arbol.write(nombreArchivoHTML, encoding='utf-8', method='html')
+        ET.indent(self.raiz, space="  ")
+        with open(nombreArchivoHTML, "w", encoding="utf-8") as f:
+            f.write("<!DOCTYPE HTML>\n")
+            f.write('<html lang="es">\n')
+            for child in self.raiz:
+                f.write(ET.tostring(child, encoding="unicode", method="html"))
+                f.write("\n")
+            f.write("</html>")
+        
 
     def ver(self):
         """
@@ -161,11 +172,14 @@ def generaHTML(archivoXML):
     # Clasificación
     html.addHeading("Clasificación", 2)
     pilotos = root.findall('.//ns:piloto', ns)
+    lista_pilotos = []
     for p in pilotos:
         pos = p.get('posicion')
         puntos = p.get('puntos')
         nombre_piloto = p.text
-        html.addParagraph(f"{pos}º - {nombre_piloto} ({puntos} puntos)")
+        lista_pilotos.append(f"{nombre_piloto} ({puntos} puntos)")
+
+    html.addList(lista_pilotos, tipo="ol")
 
     html.escribir("InfoCircuito.html")
     print("infoCircuito.html generado correctamente")
