@@ -33,10 +33,11 @@ class Cronometro {
     }
 
     mostrar() {
-        let totalDecimas = parseInt(this.tiempo / 100)
-        let minutos = parseInt(totalDecimas / 600);
-        let segundos = parseInt((totalDecimas % 600) / 10);
-        let decimas = parseInt(totalDecimas % 10);
+        let totalEnDecimas = parseInt(this.tiempo / 100)
+        let minutos = parseInt(totalEnDecimas / 600);
+        let segundos = parseInt((totalEnDecimas % 600) / 10);
+        let decimas = parseInt(totalEnDecimas % 10);
+
         let mm = minutos.toString().padStart(2, "0");
         let ss = segundos.toString().padStart(2, "0");
         let d = decimas.toString();
