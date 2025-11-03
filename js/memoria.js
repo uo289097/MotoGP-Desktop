@@ -40,7 +40,7 @@ class Memoria {
         this.tablero_bloqueado = true;
         this.primera_carta = null;
         this.segunda_carta = null;
-        this.tablero_bloqueado = false;
+        this.tablero_bloqueado = false; // PREGUNTAR
     }
 
     deshabilitarCartas() {
@@ -49,6 +49,7 @@ class Memoria {
 
         this.comprobarJuego();
         this.reiniciarAtributos();
+        // PREGUNTAR SI SON PAREJA NO HAY TIMEOUT
     }
 
     comprobarJuego() {
@@ -79,7 +80,8 @@ class Memoria {
         const img1 = this.primera_carta.querySelector("img").src;
         const img2 = this.segunda_carta.querySelector("img").src;
 
-        const sonPareja = (estado1 === "volteada" && estado2 === "volteada" && img1 === img2);
+        const sonPareja = (estado1 === "volteada" && estado2 === "volteada"
+            && img1 === img2);
 
         sonPareja ? this.deshabilitarCartas() : this.cubrirCartas();
     }
