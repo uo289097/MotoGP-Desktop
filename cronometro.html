@@ -5,7 +5,7 @@
 <head>
     <!-- Datos que describen el documento -->
     <meta charset="UTF-8" />
-    <title>MotoGP-Juegos</title>
+    <title>MotoGP-Memoria</title>
 
     <meta name="author" content="Gabriel García Martínez" />
     <meta name="description" content="Documento de juegos de MotoGP-Desktop" />
@@ -14,6 +14,8 @@
 
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
     <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
+
+    <script src="js/cronometro.js"></script>
 
     <link rel="icon" type="img/ico" href="multimedia/favicon.ico" />
 </head>
@@ -32,17 +34,20 @@
         </nav>
     </header>
 
-    <p>Estás en [<a href="index.html" title="Documento inicial">Inicio</a>] | [<strong>Juegos</strong>] </p>
-    <h2>Juegos de MotoGP-Desktop</h2>
-
+    <p>Estás en [<a href="index.html" title="Documento inicial">Inicio</a>] |
+        [<a href="juegos.html" title="Juegos">Juegos</a>] |
+        [<strong>Cronometro</strong>] </p>
     <main>
-        <ul>
-            <li><a href="memoria.html" title="Juego de memoria">Juego de memoria con cartas</a></li>
-        </ul>
-        <ul>
-            <li><a href="cronometro.html" title="Cronometro">Cronometro</a></li>
-        </ul>
+        <h2>Cronómetro</h2>
+        <p>00:00:0</p>
+        <button onclick="cronometro.arrancar()">Arrancar</button>
+        <button onclick="cronometro.parar()">Parar</button>
+        <button onclick="cronometro.reiniciar()">Reiniciar</button>
     </main>
+    <script>
+        var cronometro = new Cronometro()
+    </script>
+
 </body>
 
 </html>

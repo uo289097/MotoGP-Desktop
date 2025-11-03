@@ -1,7 +1,7 @@
 class Memoria {
     constructor() { }
 
-    flipCard(card) {
-        card.setAttribute("data-state", "flip");
+    voltearCarta(card) {
+        card.setAttribute("data-estado", "revelada");
     }
 }
