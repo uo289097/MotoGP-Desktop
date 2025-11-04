@@ -23,6 +23,14 @@ h3 {
     text-align: center;
 }
 
+/* Especificidad: 002 */
+main > p {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 1.4em;
+    margin: 0 0 1em 0;
+}
+
 @media (min-width: 320px) and (max-width: 799px) {
 
     /* Especificidad: 001 */

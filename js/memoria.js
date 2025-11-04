@@ -6,6 +6,9 @@ class Memoria {
         this.reiniciarAtributos();
         this.barajarCartas();
         this.tablero_bloqueado = false;
+        
+        this.cronometro = new Cronometro()
+        this.cronometro.arrancar()
     }
 
     voltearCarta(carta) {
@@ -60,6 +63,9 @@ class Memoria {
                 reveladas = false;
             }
         });
+        if(reveladas === true){
+            this.cronometro.parar()
+        }
     }
 
     cubrirCartas() {
