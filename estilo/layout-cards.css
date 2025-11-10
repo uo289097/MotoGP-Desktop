@@ -2,7 +2,6 @@
 main {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto repeat(3, 1fr);
     gap: 1.5em;
     justify-items: center;
     align-items: center;
@@ -24,7 +23,7 @@ h3 {
 }
 
 /* Especificidad: 002 */
-main > p {
+main>p {
     grid-column: 1 / -1;
     text-align: center;
     font-size: 1.4em;

@@ -15,7 +15,9 @@
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
     <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
 
-    <link rel="icon" type="img/ico" href="multimedia/favicon.ico" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="js/carrusel.js"></script>
 
     <link rel="icon" type="img/ico" href="multimedia/favicon.ico" />
 </head>
@@ -35,9 +37,16 @@
     </header>
 
     <p>Estás en [<strong>Inicio</strong>]</p>
-
-
-    <p>En desarrollo</p>
+    <main>
+        <script>
+            $(document).ready(function () {
+                const carrusel = new Carrusel();
+                carrusel.getFotografias(function () {
+                    carrusel.mostrarFotografias();
+                });
+            });
+        </script>
+    </main>
 </body>
 
 </html>
