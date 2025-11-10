@@ -1,19 +1,24 @@
 class Cronometro {
+
+    #tiempo;
+    #corriendo
+    #inicio
+
     constructor() {
-        this.tiempo = 0;
+        this.#tiempo = 0;
     }
 
     arrancar() {
         try {
             if (typeof Temporal !== "undefined") {
-                this.inicio = Temporal.now.instant();
+                this.#inicio = Temporal.now.instant();
             } else {
                 throw new Error("Objeto Temporal no disponible");
             }
         } catch (e) {
-            this.inicio = new Date();
+            this.#inicio = new Date();
         }
-        this.corriendo = setInterval(this.actualizar.bind(this), 100);
+        this.#corriendo = setInterval(this.actualizar.bind(this), 100);
     }
 
     actualizar() {
@@ -21,19 +26,19 @@ class Cronometro {
         try {
             if (typeof Temporal !== "undefined") {
                 actual = Temporal.now.instant();
-                this.tiempo = actual.epochMilliseconds - this.inicio.epochMilliseconds;
+                this.#tiempo = actual.epochMilliseconds - this.#inicio.epochMilliseconds;
             } else {
                 throw new Error("Objeto Temporal no disponible");
             }
         } catch (e) {
             actual = new Date();
-            this.tiempo = actual.getTime() - this.inicio.getTime();
+            this.#tiempo = actual.getTime() - this.#inicio.getTime();
         }
         this.mostrar();
     }
 
     mostrar() {
-        let totalEnDecimas = parseInt(this.tiempo / 100)
+        let totalEnDecimas = parseInt(this.#tiempo / 100)
         let minutos = parseInt(totalEnDecimas / 600);
         let segundos = parseInt((totalEnDecimas % 600) / 10);
         let decimas = parseInt(totalEnDecimas % 10);
@@ -49,12 +54,12 @@ class Cronometro {
     }
 
     parar() {
-        clearInterval(this.corriendo);
+        clearInterval(this.#corriendo);
     }
 
     reiniciar() {
-        clearInterval(this.corriendo);
-        this.tiempo = 0;
+        clearInterval(this.#corriendo);
+        this.#tiempo = 0;
         this.mostrar();
     }
 }

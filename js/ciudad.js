@@ -1,41 +1,50 @@
 class Ciudad {
 
+    #nombre;
+    #pais;
+    #gentilicio;
+    #poblacion;
+    #longitud;
+    #latitud;
+
     constructor(nombre, pais, gentilicio) {
-        this.nombre = nombre;
-        this.pais = pais;
-        this.gentilicio = gentilicio;
+        this.#nombre = nombre;
+        this.#pais = pais;
+        this.#gentilicio = gentilicio;
 
     }
 
     inicializar(poblacion, longitud, latitud) {
-        this.poblacion = poblacion;
-        this.longitud = longitud;
-        this.latitud = latitud;
+        this.#poblacion = poblacion;
+        this.#longitud = longitud;
+        this.#latitud = latitud;
     }
 
     getNombre() {
-        return this.nombre;
+        return this.#nombre;
     }
 
     getPais() {
-        return this.pais;
+        return this.#pais;
     }
 
     getInfo() {
-        const info =
-            `<ul>
-                <li>Gentilicio: ${this.gentilicio} </li>
-                <li>Población: ${this.poblacion.toLocaleString()} habitantes </li>
-            </ul>`
-        return info;
+        const ul = document.createElement("ul");
+        const liGent = document.createElement("li");
+        liGent.textContent = `Gentilicio: ${this.#gentilicio}`;
+        ul.appendChild(liGent);
+
+        const liPoblacion = document.createElement("li");
+        liPoblacion.textContent = `Población: ${this.#poblacion.toLocaleString()} habitantes`;
+        ul.appendChild(liPoblacion);
+
+        return ul;
     }
 
     getCoordenadas() {
-        document.write("<p>Coordenadas de Baturiti: (" + this.longitud + ", "
-            + this.latitud + ")</p>");
+        const p = document.createElement("p");
+        p.textContent = `Coordenadas de ${this.#nombre}: (${this.#longitud}, ${this.#latitud})`;
+
+        return p;
     }
 }
-
-long = -8.888753635975736
-latitud = 116.27644785391404
-poblacion = 52345

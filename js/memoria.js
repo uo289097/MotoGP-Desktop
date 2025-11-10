@@ -1,33 +1,39 @@
 class Memoria {
+
+    #tablero_bloqueado;
+    #primera_carta;
+    #segunda_carta;
+    #cronometro;
+
     constructor() {
-        this.tablero_bloqueado = true;
-        this.primera_carta = null;
-        this.segunda_carta = null;
-        this.reiniciarAtributos();
-        this.barajarCartas();
-        this.tablero_bloqueado = false;
-        
-        this.cronometro = new Cronometro()
-        this.cronometro.arrancar()
+        this.#tablero_bloqueado = true;
+        this.#primera_carta = null;
+        this.#segunda_carta = null;
+        this.#reiniciarAtributos();
+        this.#barajarCartas();
+        this.#tablero_bloqueado = false;
+
+        this.#cronometro = new Cronometro()
+        this.#cronometro.arrancar()
     }
 
     voltearCarta(carta) {
         const estado = carta.getAttribute("data-estado")
-        if (estado === "revelada" || estado === "volteada" || this.tablero_bloqueado) {
+        if (estado === "revelada" || estado === "volteada" || this.#tablero_bloqueado) {
             return;
         } else {
             carta.setAttribute("data-estado", "volteada");
-            if (this.primera_carta === null) {
-                this.primera_carta = carta;
+            if (this.#primera_carta === null) {
+                this.#primera_carta = carta;
                 return;
             } else {
-                this.segunda_carta = carta;
-                this.comprobarPareja();
+                this.#segunda_carta = carta;
+                this.#comprobarPareja();
             }
         }
     }
 
-    barajarCartas() {
+    #barajarCartas() {
         const main = document.querySelector("main");
         const cartas = Array.from(document.querySelectorAll("main article"));
 
@@ -39,23 +45,23 @@ class Memoria {
         cartas.forEach(carta => main.appendChild(carta));
     }
 
-    reiniciarAtributos() {
-        this.tablero_bloqueado = true;
-        this.primera_carta = null;
-        this.segunda_carta = null;
-        this.tablero_bloqueado = false; // PREGUNTAR
+    #reiniciarAtributos() {
+        this.#tablero_bloqueado = true;
+        this.#primera_carta = null;
+        this.#segunda_carta = null;
+        this.#tablero_bloqueado = false;
     }
 
-    deshabilitarCartas() {
-        this.primera_carta.setAttribute("data-estado", "revelada");
-        this.segunda_carta.setAttribute("data-estado", "revelada");
+    #deshabilitarCartas() {
+        this.#primera_carta.setAttribute("data-estado", "revelada");
+        this.#segunda_carta.setAttribute("data-estado", "revelada");
 
-        this.comprobarJuego();
-        this.reiniciarAtributos();
+        this.#comprobarJuego();
+        this.#reiniciarAtributos();
         // PREGUNTAR SI SON PAREJA NO HAY TIMEOUT
     }
 
-    comprobarJuego() {
+    #comprobarJuego() {
         const cartas = Array.from(document.querySelectorAll("main article"));
         let reveladas = true;
         cartas.forEach(carta => {
@@ -63,32 +69,32 @@ class Memoria {
                 reveladas = false;
             }
         });
-        if(reveladas === true){
-            this.cronometro.parar()
+        if (reveladas === true) {
+            this.#cronometro.parar()
         }
     }
 
-    cubrirCartas() {
-        this.tablero_bloqueado = true;
+    #cubrirCartas() {
+        this.#tablero_bloqueado = true;
 
         setTimeout(() => {
-            this.primera_carta.removeAttribute("data-estado");
-            this.segunda_carta.removeAttribute("data-estado");
-            this.reiniciarAtributos();
+            this.#primera_carta.removeAttribute("data-estado");
+            this.#segunda_carta.removeAttribute("data-estado");
+            this.#reiniciarAtributos();
         }, 1500);
 
     }
 
-    comprobarPareja() {
-        const estado1 = this.primera_carta.getAttribute("data-estado");
-        const estado2 = this.segunda_carta.getAttribute("data-estado");
+    #comprobarPareja() {
+        const estado1 = this.#primera_carta.getAttribute("data-estado");
+        const estado2 = this.#segunda_carta.getAttribute("data-estado");
 
-        const img1 = this.primera_carta.querySelector("img").src;
-        const img2 = this.segunda_carta.querySelector("img").src;
+        const img1 = this.#primera_carta.querySelector("img").src;
+        const img2 = this.#segunda_carta.querySelector("img").src;
 
         const sonPareja = (estado1 === "volteada" && estado2 === "volteada"
             && img1 === img2);
 
-        sonPareja ? this.deshabilitarCartas() : this.cubrirCartas();
+        sonPareja ? this.#deshabilitarCartas() : this.#cubrirCartas();
     }
 }

@@ -44,10 +44,12 @@
             <script>
                 let baturiti = new Ciudad("Baturiti", "Indonesia", "baturitiano");
                 baturiti.inicializar(52345, -8.888753635975736, 116.27644785391404);
-                document.write("<p>Nombre: " + baturiti.getNombre()
-                    + " (" + baturiti.getPais() + ")" + "</p>");
-                document.write(baturiti.getInfo());
-                baturiti.getCoordenadas();
+                const seccion = document.querySelector("main section");
+                const pLoc = document.createElement("p");
+                pLoc.textContent = `Nombre: ${baturiti.getNombre()} (${baturiti.getPais()})`
+                seccion.appendChild(pLoc);
+                seccion.appendChild(baturiti.getInfo());
+                seccion.appendChild(baturiti.getCoordenadas());
             </script>
         </section>
     </main>
