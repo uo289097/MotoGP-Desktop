@@ -18,10 +18,10 @@ class Cronometro {
         } catch (e) {
             this.#inicio = new Date();
         }
-        this.#corriendo = setInterval(this.actualizar.bind(this), 100);
+        this.#corriendo = setInterval(this.#actualizar.bind(this), 100);
     }
 
-    actualizar() {
+    #actualizar() {
         let actual;
         try {
             if (typeof Temporal !== "undefined") {
@@ -34,10 +34,10 @@ class Cronometro {
             actual = new Date();
             this.#tiempo = actual.getTime() - this.#inicio.getTime();
         }
-        this.mostrar();
+        this.#mostrar();
     }
 
-    mostrar() {
+    #mostrar() {
         let totalEnDecimas = parseInt(this.#tiempo / 100)
         let minutos = parseInt(totalEnDecimas / 600);
         let segundos = parseInt((totalEnDecimas % 600) / 10);
@@ -60,6 +60,6 @@ class Cronometro {
     reiniciar() {
         clearInterval(this.#corriendo);
         this.#tiempo = 0;
-        this.mostrar();
+        this.#mostrar();
     }
 }
