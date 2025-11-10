@@ -11,10 +11,20 @@ class Memoria {
         this.#segunda_carta = null;
         this.#reiniciarAtributos();
         this.#barajarCartas();
+        this.#registrarEventos();
         this.#tablero_bloqueado = false;
 
         this.#cronometro = new Cronometro()
         this.#cronometro.arrancar()
+    }
+
+    #registrarEventos() {
+        const cartas = document.querySelectorAll("main article");
+        cartas.forEach(carta => {
+            carta.addEventListener("click", event => {
+                this.voltearCarta(event.currentTarget);
+            });
+        });
     }
 
     voltearCarta(carta) {
