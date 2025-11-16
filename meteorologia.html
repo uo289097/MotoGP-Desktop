@@ -38,11 +38,10 @@
 
     <p>Estás en [<a href="index.html" title="Documento inicial">Inicio</a>] | [<strong>Meteorología</strong>] </p>
 
-
     <main>
         <h2>Meteorología de MotoGP-Desktop</h2>
         <section>
-            <h3>Información de la ciudad</h3> <!--Revisar si esto es válido-->
+            <h3>Información de la ciudad</h3>
             <script>
                 let baturiti = new Ciudad("Baturiti", "Indonesia", "baturitiano");
                 baturiti.inicializar(52345, -8.888753635975736, 116.27644785391404);
@@ -52,6 +51,9 @@
                 seccion.appendChild(pLoc);
                 seccion.appendChild(baturiti.getInfo());
                 seccion.appendChild(baturiti.getCoordenadas());
+
+                baturiti.mostrarDatosCarrera();
+                baturiti.mostrarDatosEntrenos();
             </script>
         </section>
     </main>

@@ -6,6 +6,8 @@ class Ciudad {
     #poblacion;
     #longitud;
     #latitud;
+    #meteorologia;
+    #meteorologiaEntrenos;
 
     constructor(nombre, pais, gentilicio) {
         this.#nombre = nombre;
@@ -14,7 +16,7 @@ class Ciudad {
 
     }
 
-    inicializar(poblacion, longitud, latitud) {
+    inicializar(poblacion, latitud, longitud) {
         this.#poblacion = poblacion;
         this.#longitud = longitud;
         this.#latitud = latitud;
@@ -48,17 +50,15 @@ class Ciudad {
         return p;
     }
 
-    getMetereologiaCarrera(fechaCarrera) {
+    getMetereologiaCarrera() {
         const lat = this.#latitud;
         const lon = this.#longitud;
 
-        // Configurar fecha en formato YYYY-MM-DD
-        const fecha = fechaCarrera;
-        // El servicio histórico de Open-Meteo devuelve datos para start_date = end_date
+        const fecha = "2023-09-15";
 
         const url = "https://historical-forecast-api.open-meteo.com/v1/forecast";
 
-        jsonMet = $.ajax({
+        return $.ajax({
             url: url,
             method: "GET",
             dataType: "json",
@@ -83,7 +83,6 @@ class Ciudad {
             }
         }).then(response => {
 
-            // Identificación clara de datos horarios y diarios
             const datosHorarios = {
                 horas: response.hourly.time,
                 temperatura: response.hourly.temperature_2m,
@@ -100,8 +99,7 @@ class Ciudad {
                 puestaSol: response.daily.sunset[0]
             };
 
-            // Resultado final
-            return {
+            this.#meteorologia = {
                 ciudad: this.#nombre,
                 pais: this.#pais,
                 coordenadas: { latitud: lat, longitud: lon },
@@ -116,15 +114,16 @@ class Ciudad {
 
     procesarJSONCarrera() {
 
-        if (!jsonMet) {
+        const datosMet = this.#meteorologia;
+
+        if (!datosMet) {
             console.error("JSON meteorológico inválido o vacío");
             return null;
         }
 
-        const datosHorarios = jsonMet.datosHorarios;
-        const datosDiarios = jsonMet.datosDiarios;
+        const datosHorarios = datosMet.datosHorarios;
+        const datosDiarios = datosMet.datosDiarios;
 
-        // Procesar datos horarios combinando cada hora con los valores correspondientes
         const registrosHorarios = datosHorarios.horas.map((hora, i) => ({
             hora: hora,
             temperatura: datosHorarios.temperatura[i],
@@ -135,21 +134,249 @@ class Ciudad {
             vientoDireccion: datosHorarios.vientoDireccion[i]
         }));
 
-        // Procesar datos diarios
         const registroDiario = {
             fecha: datosDiarios.fecha,
             salidaSol: datosDiarios.salidaSol,
             puestaSol: datosDiarios.puestaSol
         };
 
-        // Devolver un JSON limpio y listo para imprimir en UI
         return {
-            ciudad: jsonMet.ciudad,
-            pais: jsonMet.pais,
-            coordenadas: jsonMet.coordenadas,
+            ciudad: datosMet.ciudad,
+            pais: datosMet.pais,
+            coordenadas: datosMet.coordenadas,
             diario: registroDiario,
             horario: registrosHorarios
         };
     }
+
+    mostrarDatosCarrera() {
+
+        const contenedor = document.querySelector("main section");
+
+        const cargarDatos = this.#meteorologia
+            ? Promise.resolve()
+            : this.getMetereologiaCarrera();
+
+        cargarDatos.then(() => {
+
+            const datos = this.procesarJSONCarrera();
+            if (!datos) return;
+
+            const h3Diario = document.createElement("h3");
+            h3Diario.textContent = "Datos diarios de la carrera";
+            contenedor.appendChild(h3Diario);
+
+            const ulDiario = document.createElement("ul");
+
+            const liFecha = document.createElement("li");
+            liFecha.textContent = `Fecha: ${datos.diario.fecha}`;
+            ulDiario.appendChild(liFecha);
+
+            const liSalida = document.createElement("li");
+            liSalida.textContent = `Salida del sol: ${datos.diario.salidaSol}`;
+            ulDiario.appendChild(liSalida);
+
+            const liPuesta = document.createElement("li");
+            liPuesta.textContent = `Puesta del sol: ${datos.diario.puestaSol}`;
+            ulDiario.appendChild(liPuesta);
+
+            contenedor.appendChild(ulDiario);
+
+            const h3Horario = document.createElement("h3");
+            h3Horario.textContent = "Evolución horaria de la carrera";
+            contenedor.appendChild(h3Horario);
+
+            datos.horario.forEach(reg => {
+                const h4 = document.createElement("h4");
+                h4.textContent = `Hora: ${reg.hora}`;
+                contenedor.appendChild(h4);
+
+                const ul = document.createElement("ul");
+
+                const liTemp = document.createElement("li");
+                liTemp.textContent = `Temperatura: ${reg.temperatura} °C`;
+                ul.appendChild(liTemp);
+
+                const liSens = document.createElement("li");
+                liSens.textContent = `Sensación térmica: ${reg.sensacionTermica} °C`;
+                ul.appendChild(liSens);
+
+                const liLluvia = document.createElement("li");
+                liLluvia.textContent = `Lluvia: ${reg.lluvia} mm`;
+                ul.appendChild(liLluvia);
+
+                const liHumedad = document.createElement("li");
+                liHumedad.textContent = `Humedad: ${reg.humedad} %`;
+                ul.appendChild(liHumedad);
+
+                const liViento = document.createElement("li");
+                liViento.textContent = `Viento: ${reg.vientoVelocidad} km/h, dirección ${reg.vientoDireccion}°`;
+                ul.appendChild(liViento);
+
+                contenedor.appendChild(ul);
+            });
+
+        });
+    }
+
+
+    getMeteorologiaEntrenos() {
+
+        const lat = this.#latitud;
+        const lon = this.#longitud;
+
+        const fechaCarrera = "2023-09-15";
+
+        const f = new Date(fechaCarrera);
+        const f1 = new Date(f); f1.setDate(f.getDate() - 3);
+        const f2 = new Date(f); f2.setDate(f.getDate() - 1);
+
+        const fechaInicio = f1.toISOString().split("T")[0];
+        const fechaFin = f2.toISOString().split("T")[0];
+
+        const url = "https://historical-forecast-api.open-meteo.com/v1/forecast";
+
+        return $.ajax({
+            url: url,
+            method: "GET",
+            dataType: "json",
+            data: {
+                latitude: lat,
+                longitude: lon,
+                start_date: fechaInicio,
+                end_date: fechaFin,
+                hourly: [
+                    "temperature_2m",
+                    "precipitation",
+                    "wind_speed_10m",
+                    "relative_humidity_2m"
+                ].join(","),
+                timezone: "auto"
+            }
+        })
+            .then(response => {
+
+                const jsonEntrenos = {
+                    ciudad: this.#nombre,
+                    pais: this.#pais,
+                    coordenadas: { latitud: lat, longitud: lon },
+
+                    datosHorarios: {
+                        horas: response.hourly.time,
+                        temperatura: response.hourly.temperature_2m,
+                        lluvia: response.hourly.precipitation,
+                        vientoVelocidad: response.hourly.wind_speed_10m,
+                        humedad: response.hourly.relative_humidity_2m
+                    }
+                };
+
+                this.#meteorologiaEntrenos = jsonEntrenos;
+
+                return jsonEntrenos;
+            })
+            .catch(err => {
+                console.error("Error obteniendo meteorología de entrenos:", err);
+                return null;
+            });
+    }
+
+    procesarJSONEntrenos() {
+
+        const datos = this.#meteorologiaEntrenos;
+
+        if (!datos) {
+            console.error("No hay datos de entrenos para procesar.");
+            return null;
+        }
+
+        const horas = datos.datosHorarios.horas;
+        const temp = datos.datosHorarios.temperatura;
+        const lluvia = datos.datosHorarios.lluvia;
+        const viento = datos.datosHorarios.vientoVelocidad;
+        const humedad = datos.datosHorarios.humedad;
+
+        const dias = {};
+
+        horas.forEach((timestamp, i) => {
+            const dia = timestamp.split("T")[0];
+
+            if (!dias[dia]) dias[dia] = [];
+            dias[dia].push(i);
+        });
+
+        const medias = [];
+
+        Object.keys(dias).forEach(dia => {
+            const indices = dias[dia];
+
+            const mediaTemp = (indices.reduce((s, i) => s + temp[i], 0) / indices.length).toFixed(2);
+            const mediaLluvia = (indices.reduce((s, i) => s + lluvia[i], 0) / indices.length).toFixed(2);
+            const mediaViento = (indices.reduce((s, i) => s + viento[i], 0) / indices.length).toFixed(2);
+            const mediaHumedad = (indices.reduce((s, i) => s + humedad[i], 0) / indices.length).toFixed(2);
+
+            medias.push({
+                dia: dia,
+                temperatura: parseFloat(mediaTemp),
+                lluvia: parseFloat(mediaLluvia),
+                viento: parseFloat(mediaViento),
+                humedad: parseFloat(mediaHumedad)
+            });
+        });
+
+        return {
+            ciudad: datos.ciudad,
+            pais: datos.pais,
+            coordenadas: datos.coordenadas,
+            mediasPorDia: medias
+        };
+    }
+
+    mostrarDatosEntrenos() {
+
+        const contenedor = document.querySelector("main section");
+
+        const cargarDatos = this.#meteorologiaEntrenos
+            ? Promise.resolve()
+            : this.getMeteorologiaEntrenos();
+
+        cargarDatos.then(() => {
+
+            const datos = this.procesarJSONEntrenos();
+            if (!datos) return;
+
+            const titulo = document.createElement("h3");
+            titulo.textContent = "Medias meteorológicas de entrenamientos (3 días previos)";
+            contenedor.appendChild(titulo);
+
+            datos.mediasPorDia.forEach(dia => {
+
+                const h4 = document.createElement("h4");
+                h4.textContent = `Día: ${dia.dia}`;
+                contenedor.appendChild(h4);
+
+                const ul = document.createElement("ul");
+
+                const liTemp = document.createElement("li");
+                liTemp.textContent = `Temperatura media: ${dia.temperatura} °C`;
+                ul.appendChild(liTemp);
+
+                const liLluvia = document.createElement("li");
+                liLluvia.textContent = `Lluvia media: ${dia.lluvia} mm`;
+                ul.appendChild(liLluvia);
+
+                const liViento = document.createElement("li");
+                liViento.textContent = `Viento medio: ${dia.viento} km/h`;
+                ul.appendChild(liViento);
+
+                const liHumedad = document.createElement("li");
+                liHumedad.textContent = `Humedad media: ${dia.humedad} %`;
+                ul.appendChild(liHumedad);
+
+                contenedor.appendChild(ul);
+            });
+        });
+    }
+
+
 
 }

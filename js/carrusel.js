@@ -18,10 +18,9 @@ class Carrusel {
     getFotografias(callback) {
         const url = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
 
-        // Devolvemos una promesa porque AJAX es asíncrono
         $.ajax({
             url: url,
-            dataType: "jsonp",       // Flickr usa JSONP
+            dataType: "jsonp",
             data: {
                 tags: this.#busqueda,
                 format: "json"
@@ -52,7 +51,6 @@ class Carrusel {
         }
 
         this.#jsonPr = resultado;
-        $("p").html(`Procesadas ${this.#jsonPr.imagenes.length} fotografías.`);
         $("pre").text(JSON.stringify(this.#jsonPr, null, 2));
     }
 
@@ -82,7 +80,6 @@ class Carrusel {
             return;
         }
 
-        // Al acabar volver a primera foto.
         this.#actual = (this.#actual + 1) % this.#jsonPr.imagenes.length;
         let siguiente = this.#jsonPr.imagenes[this.#actual];
 

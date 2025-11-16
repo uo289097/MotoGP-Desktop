@@ -18,6 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="js/carrusel.js"></script>
+    <script src="js/noticias.js"></script>
 
     <link rel="icon" type="img/ico" href="multimedia/favicon.ico" />
 </head>
@@ -38,14 +39,19 @@
 
     <p>Estás en [<strong>Inicio</strong>]</p>
     <main>
-        <script>
-            $(document).ready(function () {
-                const carrusel = new Carrusel();
-                carrusel.getFotografias(function () {
-                    carrusel.mostrarFotografias();
+        <section>
+            <script>
+                $(document).ready(function () {
+                    const carrusel = new Carrusel();
+                    carrusel.getFotografias(function () {
+                        carrusel.mostrarFotografias();
+                    });
                 });
-            });
-        </script>
+
+                const noticias = new Noticias("MotoGP")
+                noticias.mostrarNoticias()
+            </script>
+        </section>
     </main>
 </body>
 
