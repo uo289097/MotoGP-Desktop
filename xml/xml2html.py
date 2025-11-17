@@ -15,7 +15,7 @@ class Html():
         ET.SubElement(self.head, 'link', rel="stylesheet", href=css)
         self.body = ET.SubElement(self.raiz, 'body')
 
-    def addHeading(self, texto, nivel=1):
+    def addHeading(self, texto, nivel=2):
         """
         Añade un encabezado <h1>, <h2>, etc.
         """
@@ -32,7 +32,7 @@ class Html():
         ET.SubElement(self.body, 'p').text = texto
 
     def addImage(self, src, alt):
-        ET.SubElement(self.body, 'img', attrib={'src': src, 'alt': alt, 'style': 'max-width:100%; height:auto;'})
+        ET.SubElement(self.body, 'img', attrib={'src': src, 'alt': alt})
 
     def addVideo(self, src, alt):
         figura = ET.SubElement(self.body, 'figure')
@@ -47,8 +47,9 @@ class Html():
         """
         Añade un enlace <a>
         """
-        enlace = ET.SubElement(self.body, 'a', href=url)
+        enlace = ET.Element('a', href=url)
         enlace.text = texto
+        return enlace
 
     def addList(self, elementos, tipo="ul"):
         lista = ET.SubElement(self.body, tipo)
@@ -77,9 +78,6 @@ class Html():
             print("Atributos =", hijo.attrib)
 
     def escribir(self, nombreArchivoHTML):
-        """
-        Escribe el archivo HTML con indentación
-        """
         ET.indent(self.raiz, space="  ")
         with open(nombreArchivoHTML, "w", encoding="utf-8") as f:
             f.write("<!DOCTYPE HTML>\n")
@@ -91,9 +89,6 @@ class Html():
         
 
     def ver(self):
-        """
-        Muestra la estructura del archivo HTML (para depurar)
-        """
         print("\nElemento raíz =", self.raiz.tag)
 
         if self.raiz.text:
@@ -141,7 +136,7 @@ def generaHTML(archivoXML):
     vencedor = root.find('.//ns:vencedor', ns).text
     duracion = root.find('.//ns:vencedor', ns).get('duracion')
 
-    html.addHeading(nombre, 1)
+    html.addHeading(nombre, 2)
     html.addParagraph(f"Ubicación: {localidad}, {pais}")
     html.addParagraph(f"Longitud total: {longitud} {unidad_long}")
     html.addParagraph(f"Anchura: {anchura} {unidad_anch}")
@@ -151,26 +146,29 @@ def generaHTML(archivoXML):
     html.addParagraph(f"Vencedor: {vencedor} (Duración: {duracion})")
 
     # Referencias (enlaces)
-    html.addHeading("Referencias", 2)
+    html.addHeading("Referencias", 3)
     referencias = root.findall('.//ns:referencia', ns)
+    ul = ET.SubElement(html.body, "ul")
+
     for ref in referencias:
-        html.addLink(ref.text.strip(), ref.get('alt'))
-        html.addParagraph("")  # salto visual
+        li = ET.SubElement(ul, "li")
+        a = html.addLink(ref.get('alt'), ref.text.strip())
+        li.append(a)
 
     # Fotografías
-    html.addHeading("Galería de imágenes", 2)
+    html.addHeading("Galería de imágenes", 3)
     fotos = root.findall('.//ns:fotografia', ns)
     for f in fotos:
         html.addImage(f.text.strip(), f.get('alt'))
 
     # Videos
-    html.addHeading("Videos del circuito", 2)
+    html.addHeading("Videos del circuito", 3)
     videos = root.findall('.//ns:video', ns)
     for v in videos:
         html.addVideo(v.text.strip(), v.get('alt'))
 
     # Clasificación
-    html.addHeading("Clasificación", 2)
+    html.addHeading("Clasificación", 3)
     pilotos = root.findall('.//ns:piloto', ns)
     lista_pilotos = []
     for p in pilotos:

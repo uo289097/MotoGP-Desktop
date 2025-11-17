@@ -1,0 +1,6 @@
+Quedarse solo con el contenido del body
+
+Revisar css para que sean adaptables en las imágenes
+NO USAR SELECTOR IMG { ... }
+
+Cambiar formato fechas y solo hora de la carrera

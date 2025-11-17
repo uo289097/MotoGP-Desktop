@@ -5,7 +5,7 @@
 <head>
     <!-- Datos que describen el documento -->
     <meta charset="UTF-8" />
-    <title>MotoGP-Ayuda</title>
+    <title>MotoGP-Circuito</title>
 
     <meta name="author" content="Gabriel García Martínez" />
     <meta name="description" content="Documento de circuitos de MotoGP-Desktop" />
@@ -14,6 +14,8 @@
 
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
     <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
+
+    <script src="js/circuito.js"></script>
 
     <link rel="icon" type="img/ico" href="multimedia/favicon.ico" />
 </head>
@@ -35,6 +37,13 @@
 
     <p>En desarrollo</p>
     <h2>Circuitos de MotoGP-Desktop</h2>
+    <main>
+        <input type="file" onchange="circuito.leerArchivoHTML(this.files[0])">
+    </main>
+
+    <script>
+        const circuito = new Circuito();
+    </script>
 </body>
 
 </html>
