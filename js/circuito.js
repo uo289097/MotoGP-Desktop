@@ -25,6 +25,21 @@ class Circuito {
                 var doc = parser.parseFromString(lector.result, "text/html");
 
                 const contenido = doc.body.cloneNode(true);
+
+                contenido.querySelectorAll("img").forEach(img => {
+                    let srcOriginal = img.getAttribute("src");
+                    if (srcOriginal && srcOriginal.startsWith("../multimedia/")) {
+                        img.src = srcOriginal.replace("../multimedia/", "multimedia/");
+                    }
+                });
+
+                contenido.querySelectorAll("video").forEach(video => {
+                    let srcOriginal = video.getAttribute("src");
+                    if (srcOriginal && srcOriginal.startsWith("../multimedia/")) {
+                        video.src = srcOriginal.replace("../multimedia/", "multimedia/");
+                    }
+                });
+
                 main.appendChild(contenido);
 
             }

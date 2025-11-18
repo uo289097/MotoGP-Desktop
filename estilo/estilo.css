@@ -39,6 +39,14 @@ header+p {
     font-size: 0.85em;
 }
 
+h3 ~ img {
+    /* Aquí van tus estilos para las imágenes del circuito */
+    display: block; /* Ejemplo: para que cada imagen ocupe su propia línea */
+    margin-bottom: 10px;
+    width: 100%; /* Ejemplo: para que sean responsivas */
+    max-width: 600px;
+}
+
 @media (min-width: 460px) and (max-width: 799px) {
 
     video {
