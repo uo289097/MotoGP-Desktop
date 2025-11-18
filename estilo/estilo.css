@@ -40,10 +40,9 @@ header+p {
 }
 
 h3 ~ img {
-    /* Aquí van tus estilos para las imágenes del circuito */
-    display: block; /* Ejemplo: para que cada imagen ocupe su propia línea */
+    display: block; 
     margin-bottom: 10px;
-    width: 100%; /* Ejemplo: para que sean responsivas */
+    width: 100%; 
     max-width: 600px;
 }
 

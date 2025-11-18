@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
 
     <script src="js/circuito.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.js"></script>
 
     <link rel="icon" type="img/ico" href="multimedia/favicon.ico" />
 </head>
@@ -39,11 +40,13 @@
     <main>
         <input type="file" onchange="circuito.leerArchivoHTML(this.files[0])">
         <input type="file" onchange="svg.leerArchivoSVG(this.files[0])">
+        <input type="file" onchange="cargador.leerArchivoKML(this.files[0])">
     </main>
 
     <script>
         const circuito = new Circuito();
         const svg = new CargadorSVG();
+        const cargador = new CargadorKML();
     </script>
 </body>
 
