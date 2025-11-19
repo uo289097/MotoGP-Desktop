@@ -84,33 +84,73 @@ class CargadorKML {
     leerArchivoKML(archivo) {
         const tipoArchivo = "kml";
         const name = archivo.name;
-        const extension = name.substring(name.length-3, name.length); 
-        if(tipoArchivo.match(extension)){
+        const extension = name.substring(name.length - 3, name.length);
+        if (tipoArchivo.match(extension)) {
             var lector = new FileReader();
             var self = this;
             lector.onload = function (evento) {
-                console.log(lector.result)
                 var parser = new DOMParser();
                 var doc = parser.parseFromString(lector.result, "text/xml");
-                
+
                 const coordenadas = doc.getElementsByTagName("coordinates")[0];
 
                 const lines = coordenadas.textContent.trim().split(/\s+/);
 
-                for (const linea of lines) {
+                for (const linea of lines) { // PREGUNTAR SI VALE FOR EACH
                     const [lon, lat, alt] = linea.split(",").map(Number);
-                
                     self.#puntos.push({ lon, lat, alt });
                 }
 
                 console.log(self.#puntos);
+
+                self.insertarCapaKML();
             }
-            lector.readAsText(archivo); 
-        } 
-        
+            lector.readAsText(archivo);
+        }
+
     }
 
     insertarCapaKML() {
+        mapboxgl.accessToken = this.#apikey;
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [116.30573077553126, -8.898637364738745],
+            zoom: 14
+        });
 
+        const geojson = {
+            'type': 'FeatureCollection',
+            'features': [
+                {
+                    'type': 'Feature',
+                    'geometry': {
+                        'type': 'LineString',
+                        'coordinates': this.#puntos.map(p => [p.lon, p.lat])
+                    }
+                }
+            ]
+        };
+
+        map.on('load', () => {
+            map.addSource('circuito-kml', {
+                'type': 'geojson',
+                'data': geojson
+            });
+
+            map.addLayer({
+                'id': 'linea-circuito',
+                'type': 'line',
+                'source': 'circuito-kml',
+                'layout': {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                'paint': {
+                    'line-color': '#ff0000',
+                    'line-width': 6
+                }
+            });
+        });
     }
 }

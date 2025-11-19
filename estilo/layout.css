@@ -6,6 +6,13 @@ header {
     align-items: center;
 }
 
+/* Especificidad 002*/
+main>div {
+    width: 100%;
+    height: 70vh;
+    max-width: 850px;
+}
+
 @media (min-width: 320px) and (max-width: 799px) {
     header {
         display: flex;

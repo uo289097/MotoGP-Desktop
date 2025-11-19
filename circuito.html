@@ -36,11 +36,14 @@
     </header>
     <p>Estás en [<a href="index.html" title="Documento inicial">Inicio</a>] | [<strong>Circuito</strong>] </p>
 
-    <h2>Circuitos de MotoGP-Desktop</h2>
+    <h2>Circuito de MotoGP-Desktop</h2>
     <main>
         <input type="file" onchange="circuito.leerArchivoHTML(this.files[0])">
         <input type="file" onchange="svg.leerArchivoSVG(this.files[0])">
         <input type="file" onchange="cargador.leerArchivoKML(this.files[0])">
+        <div id="map">
+
+        </div>
     </main>
 
     <script>
