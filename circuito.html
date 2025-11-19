@@ -38,12 +38,21 @@
 
     <h2>Circuito de MotoGP-Desktop</h2>
     <main>
-        <input type="file" onchange="circuito.leerArchivoHTML(this.files[0])">
-        <input type="file" onchange="svg.leerArchivoSVG(this.files[0])">
-        <input type="file" onchange="cargador.leerArchivoKML(this.files[0])">
-        <div id="map">
+        <section>
+            <h3>Información de un circuito de MotoGP</h3>
+            <input type="file">
+        </section>
+        <section>
+            <h3>Altimetría de un circuito de MotoGP</h3>
+            <input type="file">
+        </section>
+        <section>
+            <h3>Mapa dinámico de un circuito de MotoGP</h3>
+            <input type="file">
+            <div>
 
-        </div>
+            </div>
+        </section>
     </main>
 
     <script>

@@ -135,7 +135,7 @@ def generaHTML(archivoXML):
     vencedor = root.find('.//ns:vencedor', ns).text
     duracion = root.find('.//ns:vencedor', ns).get('duracion')
 
-    html.addHeading(nombre, 2)
+    html.addHeading(nombre, 4)
     html.addParagraph(f"Ubicación: {localidad}, {pais}")
     html.addParagraph(f"Longitud total: {longitud} {unidad_long}")
     html.addParagraph(f"Anchura: {anchura} {unidad_anch}")
@@ -145,7 +145,7 @@ def generaHTML(archivoXML):
     html.addParagraph(f"Vencedor: {vencedor} (Duración: {duracion})")
 
     # Referencias (enlaces)
-    html.addHeading("Referencias", 3)
+    html.addHeading("Referencias", 5)
     referencias = root.findall('.//ns:referencia', ns)
     ul = ET.SubElement(html.body, "ul")
 
@@ -155,19 +155,19 @@ def generaHTML(archivoXML):
         li.append(a)
 
     # Fotografías
-    html.addHeading("Galería de imágenes", 3)
+    html.addHeading("Galería de imágenes", 5)
     fotos = root.findall('.//ns:fotografia', ns)
     for f in fotos:
         html.addImage(f.text.strip(), f.get('alt'))
 
     # Videos
-    html.addHeading("Videos del circuito", 3)
+    html.addHeading("Videos del circuito", 5)
     videos = root.findall('.//ns:video', ns)
     for v in videos:
         html.addVideo(v.text.strip(), v.get('alt'))
 
     # Clasificación
-    html.addHeading("Clasificación", 3)
+    html.addHeading("Clasificación", 5)
     pilotos = root.findall('.//ns:piloto', ns)
     lista_pilotos = []
     for p in pilotos:

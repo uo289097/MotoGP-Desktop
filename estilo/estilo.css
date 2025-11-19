@@ -39,10 +39,10 @@ header+p {
     font-size: 0.85em;
 }
 
-h3 ~ img {
-    display: block; 
+h5~img {
+    display: block;
     margin-bottom: 10px;
-    width: 100%; 
+    width: 100%;
     max-width: 600px;
 }
 

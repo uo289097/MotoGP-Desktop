@@ -2,7 +2,15 @@ class Circuito {
 
     #soporta;
 
-    comprobarApiFile() {
+    constructor() { //PREGUNTAR
+        const section = document.querySelectorAll("main section:nth-of-type(1)");
+        const input = section[0].querySelector("input");
+        input.addEventListener("change", event => {
+            this.leerArchivoHTML(event.target.files[0]);
+        });
+    }
+
+    #comprobarApiFile() {
         if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
             const p = document.createElement("p");
             p.textContent = "Este navegador no soporta el API File";
@@ -14,12 +22,14 @@ class Circuito {
     }
 
     leerArchivoHTML(archivo) {
-        this.comprobarApiFile();
+        this.#comprobarApiFile();
         var tipoArchivo = /html.*/;
         if (archivo.type.match(tipoArchivo)) {
             var lector = new FileReader();
             lector.onload = function (evento) {
-                const main = document.querySelector("main");
+                const main = document.querySelector("main section:nth-of-type(1)");
+
+                //h3Ref.textContent = doc.querySelector('h3:nth-of-type(1)').textContent;
 
                 var parser = new DOMParser();
                 var doc = parser.parseFromString(lector.result, "text/html");
@@ -49,6 +59,15 @@ class Circuito {
 }
 
 class CargadorSVG {
+
+    constructor() { //PREGUNTAR
+        const section = document.querySelectorAll("main section:nth-of-type(2)");
+        const input = section[0].querySelector("input");
+        input.addEventListener("change", event => {
+            this.leerArchivoSVG(event.target.files[0]);
+        });
+    }
+
     leerArchivoSVG(archivo) {
         var tipoArchivo = /svg.*/;
         if (archivo.type.match(tipoArchivo)) {
@@ -63,10 +82,10 @@ class CargadorSVG {
     }
 
     insertarSVG(result) {
-        const main = document.querySelector("main");
-        const h3 = document.createElement("h3");
-        h3.textContent = "Altimetría del circuito de Mandalika";
-        main.appendChild(h3);
+        const main = document.querySelector("main section:nth-of-type(2)");
+        const h4 = document.createElement("h4");
+        h4.textContent = "Altimetría del circuito de Mandalika";
+        main.appendChild(h4);
 
         var parser = new DOMParser();
         var doc = parser.parseFromString(result, "image/svg+xml");
@@ -80,6 +99,14 @@ class CargadorKML {
 
     #apikey = "pk.eyJ1IjoidW8yODkwOTciLCJhIjoiY21pNGprbGZ1MXRnaTJpcXpvbGpoc3dvMyJ9.wuvFf63R5LlzT4ZKz4Mo7g";
     #puntos = [];
+
+    constructor() { //PREGUNTAR
+        const section = document.querySelectorAll("main section:nth-of-type(3)");
+        const input = section[0].querySelector("input");
+        input.addEventListener("change", event => {
+            this.leerArchivoKML(event.target.files[0]);
+        });
+    }
 
     leerArchivoKML(archivo) {
         const tipoArchivo = "kml";
@@ -112,8 +139,9 @@ class CargadorKML {
 
     insertarCapaKML() {
         mapboxgl.accessToken = this.#apikey;
+        const contenedorMapa = document.querySelector('section > div');
         const map = new mapboxgl.Map({
-            container: 'map', // container ID
+            container: contenedorMapa,
             style: 'mapbox://styles/mapbox/streets-v11',
             center: [116.30573077553126, -8.898637364738745],
             zoom: 14
