@@ -57,8 +57,9 @@
 
     <script>
         const circuito = new Circuito();
-        const svg = new CargadorSVG();
-        const cargador = new CargadorKML();
+        var soporta = circuito.getSoporta();
+        const svg = new CargadorSVG(soporta);
+        const cargador = new CargadorKML(soporta);
     </script>
 </body>
 

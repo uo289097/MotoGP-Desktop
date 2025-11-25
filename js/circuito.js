@@ -79,16 +79,22 @@ class Circuito {
             lector.readAsText(archivo);
         }
     }
+
+    getSoporta() {
+        return this.#soporta;
+    }
 }
 
 class CargadorSVG {
 
-    constructor() { //PREGUNTAR
-        const section = document.querySelectorAll("main section:nth-of-type(2)");
-        const input = section[0].querySelector("input");
-        input.addEventListener("change", event => {
-            this.leerArchivoSVG(event.target.files[0]);
-        });
+    constructor(soporta) {
+        if (soporta) {
+            const section = document.querySelectorAll("main section:nth-of-type(2)");
+            const input = section[0].querySelector("input");
+            input.addEventListener("change", event => {
+                this.leerArchivoSVG(event.target.files[0]);
+            });
+        }
     }
 
     leerArchivoSVG(archivo) {
@@ -97,7 +103,6 @@ class CargadorSVG {
             var lector = new FileReader();
             var self = this;
             lector.onload = function (evento) {
-                console.log(lector.result)
                 self.insertarSVG(lector.result);
             }
             lector.readAsText(archivo);
@@ -123,12 +128,14 @@ class CargadorKML {
     #apikey = "pk.eyJ1IjoidW8yODkwOTciLCJhIjoiY21pNGprbGZ1MXRnaTJpcXpvbGpoc3dvMyJ9.wuvFf63R5LlzT4ZKz4Mo7g";
     #puntos = [];
 
-    constructor() {
-        const section = document.querySelectorAll("main section:nth-of-type(3)");
-        const input = section[0].querySelector("input");
-        input.addEventListener("change", event => {
-            this.leerArchivoKML(event.target.files[0]);
-        });
+    constructor(soporta) {
+        if (soporta) {
+            const section = document.querySelectorAll("main section:nth-of-type(3)");
+            const input = section[0].querySelector("input");
+            input.addEventListener("change", event => {
+                this.leerArchivoKML(event.target.files[0]);
+            });
+        }
     }
 
     leerArchivoKML(archivo) {
