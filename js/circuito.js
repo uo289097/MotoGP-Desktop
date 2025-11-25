@@ -2,12 +2,15 @@ class Circuito {
 
     #soporta;
 
-    constructor() { //PREGUNTAR
+    constructor() {
         const section = document.querySelectorAll("main section:nth-of-type(1)");
         const input = section[0].querySelector("input");
-        input.addEventListener("change", event => {
-            this.leerArchivoHTML(event.target.files[0]);
-        });
+        this.#comprobarApiFile();
+        if (this.#soporta) {
+            input.addEventListener("change", event => {
+                this.leerArchivoHTML(event.target.files[0]);
+            });
+        }
     }
 
     #comprobarApiFile() {
@@ -22,19 +25,39 @@ class Circuito {
     }
 
     leerArchivoHTML(archivo) {
-        this.#comprobarApiFile();
         var tipoArchivo = /html.*/;
         if (archivo.type.match(tipoArchivo)) {
             var lector = new FileReader();
             lector.onload = function (evento) {
                 const main = document.querySelector("main section:nth-of-type(1)");
 
-                //h3Ref.textContent = doc.querySelector('h3:nth-of-type(1)').textContent;
-
                 var parser = new DOMParser();
                 var doc = parser.parseFromString(lector.result, "text/html");
 
                 const contenido = doc.body.cloneNode(true);
+
+                contenido.querySelectorAll("p").forEach(p => {
+                    const texto = p.textContent.trim();
+
+                    if (texto.startsWith("Fecha del evento:")) {
+                        const fechaStr = texto.replace("Fecha del evento:", "").trim();
+                        const fecha = new Date(fechaStr);
+
+                        const nuevoP = document.createElement("p");
+                        nuevoP.textContent =
+                            "Fecha del evento: " +
+                            fecha.toLocaleDateString("es-ES", {
+                                weekday: "long",
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit"
+                            });
+
+                        p.replaceWith(nuevoP);
+                    }
+                });
 
                 contenido.querySelectorAll("img").forEach(img => {
                     let srcOriginal = img.getAttribute("src");
@@ -100,7 +123,7 @@ class CargadorKML {
     #apikey = "pk.eyJ1IjoidW8yODkwOTciLCJhIjoiY21pNGprbGZ1MXRnaTJpcXpvbGpoc3dvMyJ9.wuvFf63R5LlzT4ZKz4Mo7g";
     #puntos = [];
 
-    constructor() { //PREGUNTAR
+    constructor() {
         const section = document.querySelectorAll("main section:nth-of-type(3)");
         const input = section[0].querySelector("input");
         input.addEventListener("change", event => {
@@ -123,12 +146,10 @@ class CargadorKML {
 
                 const lines = coordenadas.textContent.trim().split(/\s+/);
 
-                for (const linea of lines) { // PREGUNTAR SI VALE FOR EACH
+                lines.forEach(linea => {
                     const [lon, lat, alt] = linea.split(",").map(Number);
                     self.#puntos.push({ lon, lat, alt });
-                }
-
-                console.log(self.#puntos);
+                });
 
                 self.insertarCapaKML();
             }
