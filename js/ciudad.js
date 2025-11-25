@@ -163,7 +163,7 @@ class Ciudad {
             if (!datos) return;
 
             const h3Diario = document.createElement("h3");
-            h3Diario.textContent = "Datos diarios de la carrera";
+            h3Diario.textContent = "Datos del día de la carrera";
             contenedor.appendChild(h3Diario);
 
             const ulDiario = document.createElement("ul");
@@ -182,41 +182,36 @@ class Ciudad {
 
             contenedor.appendChild(ulDiario);
 
-            const h3Horario = document.createElement("h3");
-            h3Horario.textContent = "Evolución horaria de la carrera";
-            contenedor.appendChild(h3Horario);
+            const reg = datos.horario[14];
+            const h4 = document.createElement("h4");
+            h4.textContent = `Hora: ${reg.hora}`;
+            contenedor.appendChild(h4);
 
-            datos.horario.forEach(reg => {
-                const h4 = document.createElement("h4");
-                h4.textContent = `Hora: ${reg.hora}`;
-                contenedor.appendChild(h4);
+            const ul = document.createElement("ul");
 
-                const ul = document.createElement("ul");
+            const liTemp = document.createElement("li");
+            liTemp.textContent = `Temperatura: ${reg.temperatura} °C`;
+            ul.appendChild(liTemp);
 
-                const liTemp = document.createElement("li");
-                liTemp.textContent = `Temperatura: ${reg.temperatura} °C`;
-                ul.appendChild(liTemp);
+            const liSens = document.createElement("li");
+            liSens.textContent = `Sensación térmica: ${reg.sensacionTermica} °C`;
+            ul.appendChild(liSens);
 
-                const liSens = document.createElement("li");
-                liSens.textContent = `Sensación térmica: ${reg.sensacionTermica} °C`;
-                ul.appendChild(liSens);
+            const liLluvia = document.createElement("li");
+            liLluvia.textContent = `Lluvia: ${reg.lluvia} mm`;
+            ul.appendChild(liLluvia);
 
-                const liLluvia = document.createElement("li");
-                liLluvia.textContent = `Lluvia: ${reg.lluvia} mm`;
-                ul.appendChild(liLluvia);
+            const liHumedad = document.createElement("li");
+            liHumedad.textContent = `Humedad: ${reg.humedad} %`;
+            ul.appendChild(liHumedad);
 
-                const liHumedad = document.createElement("li");
-                liHumedad.textContent = `Humedad: ${reg.humedad} %`;
-                ul.appendChild(liHumedad);
+            const liViento = document.createElement("li");
+            liViento.textContent = `Viento: ${reg.vientoVelocidad} km/h, dirección ${reg.vientoDireccion}°`;
+            ul.appendChild(liViento);
 
-                const liViento = document.createElement("li");
-                liViento.textContent = `Viento: ${reg.vientoVelocidad} km/h, dirección ${reg.vientoDireccion}°`;
-                ul.appendChild(liViento);
-
-                contenedor.appendChild(ul);
-            });
-
+            contenedor.appendChild(ul);
         });
+
     }
 
 
