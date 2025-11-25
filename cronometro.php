@@ -1,55 +1,62 @@
-<?php 
+<?php
 
-    session_start();
-    class Cronometro {
+session_start();
+class Cronometro
+{
 
-        private $tiempo;
-        private $inicio;
+    private $tiempo;
+    private $inicio;
 
-        public function __construct() {
-            $this->tiempo = 0;
-        }
-
-        public function arrancar() {
-            $this->inicio = microtime(true);
-        }
-
-        public function parar() {
-            $actual = microtime(true);
-            
-            $this->tiempo = $actual - $this->inicio;
-        }
-
-        public function mostrar() {
-            $totalSegundos = $this->tiempo;
-
-            // Minutos enteros
-            $minutos = floor($totalSegundos / 60);
-    
-            // Segundos restantes con décimas
-            $segundos = $totalSegundos - ($minutos * 60);
-    
-            // Formato mm:ss.s
-            return sprintf("%02d:%04.1f", $minutos, $segundos);
-        }
+    public function __construct()
+    {
+        $this->tiempo = 0;
     }
 
-    if (!isset($_SESSION['cronometro'])) {
-        $_SESSION['cronometro'] = new Cronometro();
+    public function arrancar()
+    {
+        $this->inicio = microtime(true);
     }
 
-    $c = $_SESSION['cronometro'];
-    if (count($_POST)>0) 
-    {   
-       
-        $tiempoFinal = "";
+    public function parar()
+    {
+        $actual = microtime(true);
 
-        if(isset($_POST['botonArrancar'])) $c->arrancar();
-        if(isset($_POST['botonParar'])) $c->parar();
-        if(isset($_POST['botonMostrar'])) $tiempoFinal = $c->mostrar();
-
-        $_SESSION['cronometro'] = $c;
+        $this->tiempo = $actual - $this->inicio;
     }
+
+    public function mostrar()
+    {
+        $totalSegundos = $this->tiempo;
+
+        // Minutos enteros
+        $minutos = floor($totalSegundos / 60);
+
+        // Segundos restantes con décimas
+        $segundos = $totalSegundos - ($minutos * 60);
+
+        // Formato mm:ss.s
+        return sprintf("%02d:%04.1f", $minutos, $segundos);
+    }
+}
+
+if (!isset($_SESSION['cronometro'])) {
+    $_SESSION['cronometro'] = new Cronometro();
+}
+
+$c = $_SESSION['cronometro'];
+if (count($_POST) > 0) {
+
+    $tiempoFinal = "";
+
+    if (isset($_POST['botonArrancar']))
+        $c->arrancar();
+    if (isset($_POST['botonParar']))
+        $c->parar();
+    if (isset($_POST['botonMostrar']))
+        $tiempoFinal = $c->mostrar();
+
+    $_SESSION['cronometro'] = $c;
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -79,7 +86,7 @@
             <a href="piloto.html" title="Información del piloto">Piloto</a>
             <a href="circuito.html" title="Información del circuito">Circuito</a>
             <a href="meteorologia.html" title="Información de la meteorología">Metereología</a>
-            <a href="clasificaciones.html" title="Información de las clasificaciones">Clasificaciones</a>
+            <a href="clasificaciones.php" title="Información de las clasificaciones">Clasificaciones</a>
             <a href="juegos.html" title="Juegos de MotoGP" class="active">Juegos</a>
             <a href="ayuda.html" title="Ayuda del proyecto">Ayuda</a>
         </nav>
@@ -92,9 +99,9 @@
         <h2>Cronómetro PHP</h2>
         <p><?php echo $tiempoFinal ?></p>
         <form action="#" method="post" name="cronometro">
-            <input type="submit" name="botonArrancar" value="Arrancar"/>
-            <input type="submit" name="botonParar" value="Parar"/>
-            <input type="submit" name="botonMostrar" value="Mostrar"/>
+            <input type="submit" name="botonArrancar" value="Arrancar" />
+            <input type="submit" name="botonParar" value="Parar" />
+            <input type="submit" name="botonMostrar" value="Mostrar" />
         </form>
     </main>
 
