@@ -56,7 +56,7 @@ class Carrusel {
         const elementos = h2.add(img);
 
         const article = $("<article>").append(elementos);
-        $("main").append(article);
+        $("main > section:nth-of-type(1)").append(article);
 
         setInterval(this.cambiarFotografia.bind(this), 3000);
     }
