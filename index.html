@@ -42,14 +42,13 @@
         <section>
             <script>
                 $(document).ready(function () {
-                    const carrusel = new Carrusel();
-                    carrusel.getFotografias(function () {
-                        carrusel.mostrarFotografias();
-                    });
+                    const carrusel = new Carrusel("mandalika, motogp");
+                    carrusel.getFotografias();
                 });
 
-                const noticias = new Noticias("MotoGP")
-                noticias.mostrarNoticias()
+
+                /*const noticias = new Noticias("MotoGP")
+                noticias.mostrarNoticias()*/
             </script>
         </section>
     </main>

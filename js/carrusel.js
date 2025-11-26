@@ -3,19 +3,15 @@ class Carrusel {
     #busqueda;
     #actual;
     #maximo;
-    #fotos;
-    #imgElement;
-    #json;
-    #jsonPr
+    #imagenes;
 
-    constructor() {
-        this.#busqueda = "mandalika, motogp";
+    constructor(busqueda) {
+        this.#busqueda = busqueda;
         this.#actual = 0;
         this.#maximo = 4;
-        this.#imgElement = null;
     }
 
-    getFotografias(callback) {
+    getFotografias() {
         const url = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
 
         $.ajax({
@@ -23,71 +19,59 @@ class Carrusel {
             dataType: "jsonp",
             data: {
                 tags: this.#busqueda,
+                tagmode: "any",
                 format: "json"
             },
             success: (data) => {
-                this.#json = data;
-                this.procesarJSONFotografias();
-                if (callback) callback(this.#jsonPr);
-            },
-            error: () => {
-                console.error("Error al obtener las imágenes de Flickr.");
+                this.procesarJSONFotografias(data);
+            }, error: () => {
+                console.error("Error al obtener las imágenes de la API de Flickr");
             }
         });
     }
 
-    procesarJSONFotografias() {
-        if (!this.#json) {
-            console.error("No se ha obtenido el JSON.");
-            return;
+    procesarJSONFotografias(data) {
+        var imgs = [];
+        for (let i = 0; i <= this.#maximo; i++) {
+            const item = data.items[i];
+            const url = item.media.m.replace("_m", "_z");
+            const title = item.title;
+            imgs.push({ url, title });
         }
-        let resultado = { imagenes: [] };
-        for (let i = 0; i < this.#json.items.length && i < this.#maximo; i++) {
-            let item = this.#json.items[i];
-            resultado.imagenes.push({
-                url: item.media.m.replace("_m.", "_z."),
-                titulo: item.title
-            });
-        }
-
-        this.#jsonPr = resultado;
-        $("pre").text(JSON.stringify(this.#jsonPr, null, 2));
+        this.#imagenes = imgs;
+        this.mostrarFotografias();
     }
 
-    mostrarFotografias(fotos) {
-        if (!this.#jsonPr || this.#jsonPr.imagenes.length === 0) {
-            console.error("No hay imágenes para mostrar.");
-            return;
-        }
+    mostrarFotografias() {
+        const imagen = this.#imagenes[0];
+        const title = imagen.title;
+        const url = imagen.url;
 
-        let primeraImagen = this.#jsonPr.imagenes[0];
+        const h2 = $("<h2>").text("Imágenes del circuito de Mandalika");
 
-        let titulo = $("<h2>").text("Imágenes del circuito de Mandalika");
-        let imagen = $("<img>").attr({
-            src: primeraImagen.url,
-            alt: primeraImagen.titulo
-        });
+        const img = $("<img>")
+        img.attr("alt", title);
+        img.attr("src", url);
 
-        let elementos = titulo.add(imagen);
-        let article = $("<article>").append(elementos);
+        const elementos = h2.add(img);
+
+        const article = $("<article>").append(elementos);
         $("main").append(article);
 
         setInterval(this.cambiarFotografia.bind(this), 3000);
     }
 
     cambiarFotografia() {
-        if (!this.#jsonPr || this.#jsonPr.imagenes.length === 0) {
-            return;
+        this.#actual++;
+        if (this.#actual > this.#maximo) {
+            this.#actual = 0;
         }
 
-        this.#actual = (this.#actual + 1) % this.#jsonPr.imagenes.length;
-        let siguiente = this.#jsonPr.imagenes[this.#actual];
+        const imagen = this.#imagenes[this.#actual];
+        const img = $("main article img");
+        img.attr("src", imagen.url);
+        img.attr("alt", imagen.title);
 
-        $("main article img").attr({
-            src: siguiente.url,
-            alt: siguiente.titulo
-        });
     }
 
 }
-
