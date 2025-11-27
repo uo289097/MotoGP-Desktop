@@ -6,6 +6,9 @@ class Ciudad {
     #poblacion;
     #longitud;
     #latitud;
+    #fechaCarrera = "2025-10-05";
+    #startDate = "2025-10-03";
+    #endDate = "2025-10-04";
     #meteorologia;
     #meteorologiaEntrenos;
 
@@ -50,172 +53,10 @@ class Ciudad {
         return p;
     }
 
-    getMeteorologiaEntrenos() {
-
-        const lat = this.#latitud;
-        const lon = this.#longitud;
-
-        const fechaCarrera = "2023-09-15";
-
-        const f = new Date(fechaCarrera);
-        const f1 = new Date(f); f1.setDate(f.getDate() - 3);
-        const f2 = new Date(f); f2.setDate(f.getDate() - 1);
-
-        const fechaInicio = f1.toISOString().split("T")[0];
-        const fechaFin = f2.toISOString().split("T")[0];
-
-        const url = "https://historical-forecast-api.open-meteo.com/v1/forecast";
-
-        return $.ajax({
-            url: url,
-            method: "GET",
-            dataType: "json",
-            data: {
-                latitude: lat,
-                longitude: lon,
-                start_date: fechaInicio,
-                end_date: fechaFin,
-                hourly: [
-                    "temperature_2m",
-                    "precipitation",
-                    "wind_speed_10m",
-                    "relative_humidity_2m"
-                ].join(","),
-                timezone: "auto"
-            }
-        })
-            .then(response => {
-
-                const jsonEntrenos = {
-                    ciudad: this.#nombre,
-                    pais: this.#pais,
-                    coordenadas: { latitud: lat, longitud: lon },
-
-                    datosHorarios: {
-                        horas: response.hourly.time,
-                        temperatura: response.hourly.temperature_2m,
-                        lluvia: response.hourly.precipitation,
-                        vientoVelocidad: response.hourly.wind_speed_10m,
-                        humedad: response.hourly.relative_humidity_2m
-                    }
-                };
-
-                this.#meteorologiaEntrenos = jsonEntrenos;
-
-                return jsonEntrenos;
-            })
-            .catch(err => {
-                console.error("Error obteniendo meteorología de entrenos:", err);
-                return null;
-            });
-    }
-
-    procesarJSONEntrenos() {
-
-        const datos = this.#meteorologiaEntrenos;
-
-        if (!datos) {
-            console.error("No hay datos de entrenos para procesar.");
-            return null;
-        }
-
-        const horas = datos.datosHorarios.horas;
-        const temp = datos.datosHorarios.temperatura;
-        const lluvia = datos.datosHorarios.lluvia;
-        const viento = datos.datosHorarios.vientoVelocidad;
-        const humedad = datos.datosHorarios.humedad;
-
-        const dias = {};
-
-        horas.forEach((timestamp, i) => {
-            const dia = timestamp.split("T")[0];
-
-            if (!dias[dia]) dias[dia] = [];
-            dias[dia].push(i);
-        });
-
-        const medias = [];
-
-        Object.keys(dias).forEach(dia => {
-            const indices = dias[dia];
-
-            const mediaTemp = (indices.reduce((s, i) => s + temp[i], 0) / indices.length).toFixed(2);
-            const mediaLluvia = (indices.reduce((s, i) => s + lluvia[i], 0) / indices.length).toFixed(2);
-            const mediaViento = (indices.reduce((s, i) => s + viento[i], 0) / indices.length).toFixed(2);
-            const mediaHumedad = (indices.reduce((s, i) => s + humedad[i], 0) / indices.length).toFixed(2);
-
-            medias.push({
-                dia: dia,
-                temperatura: parseFloat(mediaTemp),
-                lluvia: parseFloat(mediaLluvia),
-                viento: parseFloat(mediaViento),
-                humedad: parseFloat(mediaHumedad)
-            });
-        });
-
-        return {
-            ciudad: datos.ciudad,
-            pais: datos.pais,
-            coordenadas: datos.coordenadas,
-            mediasPorDia: medias
-        };
-    }
-
-    mostrarDatosEntrenos() {
-
-        const contenedor = document.querySelector("main section");
-
-        const cargarDatos = this.#meteorologiaEntrenos
-            ? Promise.resolve()
-            : this.getMeteorologiaEntrenos();
-
-        cargarDatos.then(() => {
-
-            const datos = this.procesarJSONEntrenos();
-            if (!datos) return;
-
-            const titulo = document.createElement("h3");
-            titulo.textContent = "Medias meteorológicas de entrenamientos (3 días previos)";
-            contenedor.appendChild(titulo);
-
-            datos.mediasPorDia.forEach(dia => {
-
-                const h4 = document.createElement("h4");
-                h4.textContent = `Día: ${dia.dia}`;
-                contenedor.appendChild(h4);
-
-                const ul = document.createElement("ul");
-
-                const liTemp = document.createElement("li");
-                liTemp.textContent = `Temperatura media: ${dia.temperatura} °C`;
-                ul.appendChild(liTemp);
-
-                const liLluvia = document.createElement("li");
-                liLluvia.textContent = `Lluvia media: ${dia.lluvia} mm`;
-                ul.appendChild(liLluvia);
-
-                const liViento = document.createElement("li");
-                liViento.textContent = `Viento medio: ${dia.viento} km/h`;
-                ul.appendChild(liViento);
-
-                const liHumedad = document.createElement("li");
-                liHumedad.textContent = `Humedad media: ${dia.humedad} %`;
-                ul.appendChild(liHumedad);
-
-                contenedor.appendChild(ul);
-            });
-        });
-    }
-
-
-
-
-
-    getMeteorologiaCarrera() {
-        const fechaCarrera = "2025-10-05";
+    getMeteorologiaCarrera(callback) {
         const urlBase = "https://historical-forecast-api.open-meteo.com/v1/forecast";
         const url = `${urlBase}?latitude=${this.#latitud}&longitude=${this.#longitud}` +
-            `&start_date=${fechaCarrera}&end_date=${fechaCarrera}&timezone=Asia/Singapore` +
+            `&start_date=${this.#fechaCarrera}&end_date=${this.#fechaCarrera}&timezone=Asia/Singapore` +
             `&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,` +
             `wind_direction_10m,rain&daily=sunrise,sunset`;
         $.ajax({
@@ -223,6 +64,7 @@ class Ciudad {
             dataType: "json"
             , success: (data) => {
                 this.#procesarJSONCarrera(data);
+                if (callback) callback()
             }, error: () => {
                 console.error("Error al obtener los datos de la API");
             }
@@ -255,12 +97,12 @@ class Ciudad {
 
     #mostrarDatosCarrera(datosCarrera) {
         const section = $("<section>");
-        section.append($("<h3>").text("Datos meteorológicos de la carrera"));
+        section.append($("<h3>").text(`Datos meteorológicos de la carrera (${this.#fechaCarrera})`));
 
         const lista = $("<ul>");
         lista.append($("<li>").text(`Temperatura: ${datosCarrera.temperature_2m} ºC`));
         lista.append($("<li>").text(`Sensación térmica: ${datosCarrera.apparent_temperature} ºC`));
-        lista.append($("<li>").text(`Humedad: ${datosCarrera.relative_humidity_2m}%`));
+        lista.append($("<li>").text(`Humedad: ${datosCarrera.relative_humidity_2m} % `));
         lista.append($("<li>").text(`Lluvia: ${datosCarrera.rain} mm`));
         lista.append($("<li>").text(`Viento: ${datosCarrera.wind_speed_10m} km/h`));
         lista.append($("<li>").text(`Dirección del viento: ${datosCarrera.wind_direction_10m}º`));
@@ -272,30 +114,27 @@ class Ciudad {
         $("main").append(section);
     }
 
-    getMeteorologiaEntrenos2() {
-        const startDate = "2025-10-03";
-        const endDate = "2025-10-04";
+    getMeteorologiaEntrenos() {
         const urlBase = "https://historical-forecast-api.open-meteo.com/v1/forecast";
         const url = `${urlBase}?latitude=${this.#latitud}&longitude=${this.#longitud}` +
-            `&start_date=${startDate}&end_date=${endDate}&timezone=Asia/Singapore` +
+            `&start_date=${this.#startDate}&end_date=${this.#endDate}&timezone=Asia/Singapore` +
             `&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,rain`;
         $.ajax({
             url: url,
             dataType: "json"
             , success: (data) => {
-                this.#procesarJSONEntrenos2(data);
+                this.#procesarJSONEntrenos(data);
             }, error: () => {
                 console.error("Error al obtener los datos de la API");
             }
         });
     }
 
-    #procesarJSONEntrenos2(data) {
-        console.log(data);
+    #procesarJSONEntrenos(data) {
         //ENTRENOS 1 -> 10 - 11 (03)
-        //ENTRENOS 2 -> 15 - 16 (03) -> MEDIA DE ESTAS 4
+        //ENTRENOS 2 -> 15 - 16 (03)
         //ENTRENOS 3 -> 10 - 11 (04)
-        //SPRINT -> 15 (04) -> MEDIA DE ESTAS 3
+        //SPRINT -> 15 (04) 
         const temperature_2mV = (data.hourly.temperature_2m[10] + data.hourly.temperature_2m[11]
             + data.hourly.temperature_2m[15] + data.hourly.temperature_2m[16]) / 4;
         const rainV = (data.hourly.rain[10] + data.hourly.rain[11]
@@ -315,20 +154,45 @@ class Ciudad {
 
 
         const datosEntrenos = {
-            temperature_2mV,
-            rainV,
-            relative_humidity_2mV,
-            wind_speed_10mV,
-            temperature_2mS,
-            rainS,
-            relative_humidity_2mS,
-            wind_speed_10mS
+            temperature_2mV: temperature_2mV.toFixed(2),
+            rainV: rainV.toFixed(2),
+            relative_humidity_2mV: relative_humidity_2mV.toFixed(2),
+            wind_speed_10mV: wind_speed_10mV.toFixed(2),
+
+            temperature_2mS: temperature_2mS.toFixed(2),
+            rainS: rainS.toFixed(2),
+            relative_humidity_2mS: relative_humidity_2mS.toFixed(2),
+            wind_speed_10mS: wind_speed_10mS.toFixed(2)
         };
-        this.#mostrarDatosEntrenos2(datosEntrenos);
+        this.#mostrarDatosEntrenos(datosEntrenos);
     }
 
-    #mostrarDatosEntrenos2(datosEntrenos) {
-        console.log(datosEntrenos);
+    #mostrarDatosEntrenos(datosEntrenos) {
+        const section = $("<section>");
+        section.append($("<h3>")
+            .text(`Media de los datos meteorológicos de los entrenos del viernes (${this.#startDate})`));
+
+        const listaV = $("<ul>");
+        listaV.append($("<li>").text(`Temperatura: ${datosEntrenos.temperature_2mV} ºC`));
+        listaV.append($("<li>").text(`Humedad: ${datosEntrenos.relative_humidity_2mV} % `));
+        listaV.append($("<li>").text(`Lluvia: ${datosEntrenos.rainV} mm`));
+        listaV.append($("<li>").text(`Viento: ${datosEntrenos.wind_speed_10mV} km/h`));
+
+        section.append(listaV);
+
+        const section2 = $("<section>");
+        section2.append($("<h3>")
+            .text(`Media de los datos meteorológicos de los entrenos del sábado (${this.#endDate})`));
+        const listaS = $("<ul>");
+        listaS.append($("<li>").text(`Temperatura: ${datosEntrenos.temperature_2mS} ºC`));
+        listaS.append($("<li>").text(`Humedad: ${datosEntrenos.relative_humidity_2mS} % `));
+        listaS.append($("<li>").text(`Lluvia: ${datosEntrenos.rainS} mm`));
+        listaS.append($("<li>").text(`Viento: ${datosEntrenos.wind_speed_10mS} km/h`));
+
+        section2.append(listaS);
+
+        $("main").append(section);
+        $("main").append(section2);
     }
 
 

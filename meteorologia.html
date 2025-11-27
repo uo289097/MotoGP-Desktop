@@ -51,13 +51,9 @@
                 seccion.appendChild(baturiti.getInfo());
                 seccion.appendChild(baturiti.getCoordenadas());
 
-                baturiti.getMeteorologiaCarrera();
-                //baturiti.mostrarDatosEntrenos();
-            </script>
-        </section>
-        <section>
-            <script>
-                baturiti.getMeteorologiaEntrenos2();
+                baturiti.getMeteorologiaCarrera(() => {
+                    baturiti.getMeteorologiaEntrenos();
+                });
             </script>
         </section>
     </main>
