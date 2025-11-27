@@ -134,7 +134,9 @@ def generaSVG(archivoXML):
     tramos = root.findall('.//ns:tramo', namespace)
     puntos_svg = []
     distanciaTotal = 0
-    escala = 0.1
+    escala_x = 0.05
+    escala_y = 7
+    max_altitud = 20
     puntos_string = ""
 
     for tramo in tramos:
@@ -143,12 +145,14 @@ def generaSVG(archivoXML):
 
         punto = tramo.find('ns:punto', namespace)
         altitudPunto = float(punto.find('ns:altitud', namespace).text.strip()) 
-        puntos_svg.append((distanciaTotal * escala, altitudPunto))
+        x = distanciaTotal * escala_x
+        y = (max_altitud - altitudPunto) * escala_y   # invertir eje Y del SVG
+        puntos_svg.append((x, y))
 
     for x, y in puntos_svg:
         puntos_string += ("{0},{1} ".format(x, y))
         
-    baseAltura = 20 
+    baseAltura = max(y for x, y in puntos_svg) + 7
     xMin = int(puntos_svg[0][0])
     xMax = int(puntos_svg[-1][0])
     puntos_string += f"{xMax},{baseAltura} {xMin},{baseAltura} {xMin},{int(puntos_svg[0][1])}"
