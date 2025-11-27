@@ -44,15 +44,20 @@
             <script>
                 let baturiti = new Ciudad("Baturiti", "Indonesia", "baturitiano");
                 baturiti.inicializar(52345, -8.888753635975736, 116.27644785391404);
-                const seccion = document.querySelector("main section");
+                const seccion = document.querySelector("main section:nth-of-type(1)");
                 const pLoc = document.createElement("p");
                 pLoc.textContent = `Nombre: ${baturiti.getNombre()} (${baturiti.getPais()})`
                 seccion.appendChild(pLoc);
                 seccion.appendChild(baturiti.getInfo());
                 seccion.appendChild(baturiti.getCoordenadas());
 
-                baturiti.mostrarDatosCarrera();
-                baturiti.mostrarDatosEntrenos();
+                baturiti.getMeteorologiaCarrera();
+                //baturiti.mostrarDatosEntrenos();
+            </script>
+        </section>
+        <section>
+            <script>
+                baturiti.getMeteorologiaEntrenos2();
             </script>
         </section>
     </main>

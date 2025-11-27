@@ -17,15 +17,14 @@ class Noticias {
             const respuesta = await fetch(url);
             if (!respuesta.ok) throw new Error('Noticias no encontradas para esa búsqueda');
             const datos = await respuesta.json();
-            this.procesarInformacion(datos);
-            //this.resultado.textContent = `Temperatura: ${temp}°C, Clima: ${descripcion}`;
+            this.#procesarInformacion(datos);
         } catch (error) {
             console.error('Error al obtener las noticias: ' + error.message);
         }
 
     }
 
-    procesarInformacion(datos) {
+    #procesarInformacion(datos) {
         let noticias = [];              // TODO LET???
         for (let i = 0; i < datos.data.length; i++) {
             const title = datos.data[i].title;
@@ -35,10 +34,10 @@ class Noticias {
 
             noticias.push({ title, entradilla, url, source });
         }
-        this.mostrarNoticias(noticias);
+        this.#mostrarNoticias(noticias);
     }
 
-    mostrarNoticias(noticias) {
+    #mostrarNoticias(noticias) {
         const section = $("main > section:nth-of-type(2)");
 
         const h2 = $("<h2>").text("Noticias de MotoGP");

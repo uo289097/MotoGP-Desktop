@@ -23,14 +23,14 @@ class Carrusel {
                 format: "json"
             },
             success: (data) => {
-                this.procesarJSONFotografias(data);
+                this.#procesarJSONFotografias(data);
             }, error: () => {
                 console.error("Error al obtener las imágenes de la API de Flickr");
             }
         });
     }
 
-    procesarJSONFotografias(data) {
+    #procesarJSONFotografias(data) {
         var imgs = [];
         for (let i = 0; i <= this.#maximo; i++) {
             const item = data.items[i];
@@ -39,10 +39,10 @@ class Carrusel {
             imgs.push({ url, title });
         }
         this.#imagenes = imgs;
-        this.mostrarFotografias();
+        this.#mostrarFotografias();
     }
 
-    mostrarFotografias() {
+    #mostrarFotografias() {
         const imagen = this.#imagenes[0];
         const title = imagen.title;
         const url = imagen.url;
@@ -58,10 +58,10 @@ class Carrusel {
         const article = $("<article>").append(elementos);
         $("main > section:nth-of-type(1)").append(article);
 
-        setInterval(this.cambiarFotografia.bind(this), 3000);
+        setInterval(this.#cambiarFotografia.bind(this), 3000);
     }
 
-    cambiarFotografia() {
+    #cambiarFotografia() {
         this.#actual++;
         if (this.#actual > this.#maximo) {
             this.#actual = 0;
