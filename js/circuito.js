@@ -172,7 +172,7 @@ class CargadorKML {
             container: contenedorMapa,
             style: 'mapbox://styles/mapbox/streets-v11',
             center: [116.30573077553126, -8.898637364738745],
-            zoom: 14
+            zoom: 2
         });
 
         const geojson = {
@@ -192,6 +192,13 @@ class CargadorKML {
             map.addSource('circuito-kml', {
                 'type': 'geojson',
                 'data': geojson
+            });
+
+            map.flyTo({
+                center: [116.30573077553126, -8.898637364738745],
+                zoom: 14,
+                speed: 0.3,
+                curve: 1.5
             });
 
             map.addLayer({
