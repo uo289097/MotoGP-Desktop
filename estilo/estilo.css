@@ -10,7 +10,7 @@ body {
 
 /* Especificidad 001*/
 header {
-    background-color: #D43F00;
+    background-color: #d8591a;
     color: #FFFFFF;
     /* No hay problema en la herencia de colores */
 }
