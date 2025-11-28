@@ -12,7 +12,7 @@ class Carrusel {
     }
 
     getFotografias() {
-        const url = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+        const url = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
 
         $.ajax({
             url: url,
