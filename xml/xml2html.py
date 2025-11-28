@@ -38,7 +38,7 @@ class Html():
         figura = ET.SubElement(self.body, 'figure')
         video = ET.SubElement(figura, 'video', attrib={
             'src': src,
-            'controls': 'auto'
+            'controls': ''
         })
         ET.SubElement(figura, 'figcaption').text = alt
 

@@ -34,7 +34,10 @@ class Circuito {
                 var parser = new DOMParser();
                 var doc = parser.parseFromString(lector.result, "text/html");
 
-                const contenido = doc.body.cloneNode(true);
+                const contenido = document.createDocumentFragment();
+                Array.from(doc.body.children).forEach(elemento => {
+                    contenido.appendChild(elemento.cloneNode(true));
+                });
 
                 contenido.querySelectorAll("p").forEach(p => {
                     const texto = p.textContent.trim();

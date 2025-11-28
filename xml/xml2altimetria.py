@@ -20,7 +20,7 @@ class Svg(object):
         """
         Crea el elemento raíz, el espacio de nombres y la versión
         """
-        self.raiz = ET.Element('svg', xmlns="http://www.w3.org/2000/svg", version="2.0")
+        self.raiz = ET.Element('svg', xmlns="http://www.w3.org/2000/svg", version="1.1")
 
 
     def addRect(self,x,y,width,height,fill, strokeWidth,stroke):
@@ -33,7 +33,7 @@ class Svg(object):
                       width=width,
                       height=height,
                       fill=fill, 
-                      strokeWidth=strokeWidth,
+                      **{'stroke-width': strokeWidth},
                       stroke=stroke)
         
     def addCircle(self,cx,cy,r,fill):
@@ -46,7 +46,7 @@ class Svg(object):
                       r=r,
                       fill=fill)
         
-    def addLine(self,x1,y1,x2,y2,stroke,strokeWith):
+    def addLine(self,x1,y1,x2,y2,stroke,strokeWidth):
         """
         Añade un elemento line
         """
@@ -56,16 +56,16 @@ class Svg(object):
                       x2=x2,
                       y2=y2,
                       stroke=stroke,
-                      strokeWith=strokeWith)
+                      **{'stroke-width': strokeWidth},)
 
-    def addPolyline(self,points,stroke,strokeWith,fill):
+    def addPolyline(self,points,stroke,strokeWidth,fill):
         """
         Añade un elemento polyline
         """
         ET.SubElement(self.raiz,'polyline',
                       points=points,
                       stroke=stroke,
-                      strokeWith=strokeWith,
+                      **{'stroke-width': strokeWidth},
                       fill=fill)
         
     def addText(self,texto,x,y,fontFamily,fontSize,style):
@@ -160,7 +160,7 @@ def generaSVG(archivoXML):
     altimetriaSvg = Svg()
     altimetriaSvg.addPolyline(puntos_string.strip(), 
                                stroke="blue", 
-                               strokeWith="5", 
+                               strokeWidth="5", 
                                fill="#FF0000")
     altimetriaSvg.escribir("altimetria.svg")
     print("altimetria.svg generado correctamente")
