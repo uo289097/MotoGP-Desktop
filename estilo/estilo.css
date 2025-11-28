@@ -10,14 +10,14 @@ body {
 
 /* Especificidad 001*/
 header {
-    background-color: #d8591a;
+    background-color: #d65311;
     color: #FFFFFF;
     /* No hay problema en la herencia de colores */
 }
 
 /* Especificidad 002 */
 header a {
-    color: white;
+    color: #FFFFFF;
     text-decoration-line: overline;
     /* No hay problema en la herencia de colores */
 }
