@@ -134,6 +134,9 @@ def generaHTML(archivoXML):
     patrocinador = root.find('.//ns:patrocinador', ns).text
     vencedor = root.find('.//ns:vencedor', ns).text
     duracion = root.find('.//ns:vencedor', ns).get('duracion')
+    duracion = duracion[2:7]
+    duracion = duracion.replace("M",":")
+
 
     html.addHeading(nombre, 4)
     html.addParagraph(f"Ubicación: {localidad}, {pais}")
