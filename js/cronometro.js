@@ -11,12 +11,12 @@ class Cronometro {
     arrancar() {
         try {
             if (typeof Temporal !== "undefined") {
-                this.#inicio = Temporal.now.instant();
+                this.#inicio = Temporal.now.instant() - this.#tiempo;
             } else {
                 throw new Error("Objeto Temporal no disponible");
             }
         } catch (e) {
-            this.#inicio = new Date();
+            this.#inicio = new Date(new Date().getTime() - this.#tiempo); //TODO PREGUNTAR
         }
         this.#corriendo = setInterval(this.#actualizar.bind(this), 100);
     }
