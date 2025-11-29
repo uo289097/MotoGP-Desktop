@@ -38,43 +38,48 @@
         <section>
             <h3>Inicio</h3>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                La página Inicio contiene dos bloques de contenido cargados mediante JavaScript. El primer
+                bloque muestra un carrusel de imágenes del circuito de Mandalika obtenido desde la API pública
+                de Flickr, rotando automáticamente cada 3 s. El segundo bloque muestra noticias sobre MotoGP
+                consultando la API de TheNewsAPI, generando artículos con título, entradilla, enlace y fuente.
             </p>
         </section>
 
         <section>
             <h3>Piloto</h3>
             <p>
-                Documento con información sobre el piloto de MotoGP Joan Mir. En él se pueden encontrar
-                sus datos personales, los equipos en los que ha estado, sus resultados en la temporada
-                2024, sus redes sociales e información adicional. Además, también se puede encontrar otra
-                información como la explicación de diferentes conceptos técnicos de MotoGP.
+                Muestra la información completa sobre un piloto de MotoGP, en este caso Joan Mir. Incluye una
+                descripción general, datos personales, una imagen y un vídeo. También presenta sus equipos a
+                lo largo de su carrera, un glosario de términos de MotoGP y sus resultados en la temporada 2024.
+                Además, ofrece enlaces a sus redes sociales y un apartado con información adicional sobre su
+                trayectoria deportiva.
             </p>
         </section>
 
         <section>
             <h3>Circuito</h3>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                La página permite cargar tres tipos de archivos relacionados con un circuito de MotoGP:
+                un HTML con información del circuito, un SVG con la altimetría y un KML para generar el
+                mapa dinámico. Se comprueba si el navegador soporta API File y, si es así, lee el HTML,
+                lo analiza y lo inserta en la página. Además, se muestra el SVG de altimetría dentro de
+                la sección correspondiente y se procesa un archivo KML, se extraen coordenadas y
+                se genera un mapa interactivo con Mapbox mostrando el trazado del circuito. Todo el contenido
+                se carga dinámicamente según los archivos seleccionados por el usuario.
             </p>
         </section>
 
         <section>
             <h3>Metereología</h3>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                La página muestra la meteorología de la ciudad más cercana al circuito de MotoGP de Mandalika.
+                Se muestra tanto la información de la ciudad con su getilicio, población y coordenadas como
+                los datos meteorológicos de la carrera, incluyendo temperatura, sensación térmica, humedad,
+                lluvia, velocidad y dirección del viento, hora del amanecer y hora del atardecer. Además,
+                también se pueden ver la media de los datos meteorológicos de los entrenamientos, entre los que
+                se incluyen la temperatura, la humedad, la lluvia y el viento. Toda la información se carga
+                dinámicamente en la página usando la API meteorológica y se presenta en secciones separadas
+                para la carrera y los entrenamientos.
             </p>
         </section>
 
@@ -92,25 +97,39 @@
         <section>
             <h3>Juegos</h3>
             <p>
-                Documento que contiene enlaces a los juegos de la página, entre los que se incluyen
-                un Juego de memoria con cartas, un cronómetro.
+                Presenta los minijuegos disponibles en el proyecto MotoGP Desktop. Incluye un menú con acceso
+                a tres actividades: un juego de memoria con cartas, un cronómetro con JS y un cronómetro
+                desarrollado en PHP. Sirve como página de selección para que el usuario elija y acceda
+                rápidamente a cada juego.
             </p>
+            <section>
+                <h4>Memoria</h4>
+                <p>
+                    Muestra el juego de cartas del proyecto MotoGP Desktop. Presenta un cronómetro y doce cartas
+                    emparejadas con logos de distintas marcas, así como el logo de MotoGP que se mezclan
+                    aleatoriamente al iniciar la partida. El usuario debe encontrar las parejas volteando las
+                    cartas, mientras el temporizador avanza. El juego finaliza cuando todas las cartas quedan
+                    reveladas y el cronómetro se detiene.
+                </p>
+            </section>
+            <section>
+                <h4>Cronómetro</h4>
+                <p>
+                    Ofrece una herramienta para medir tiempo dentro del proyecto MotoGP Desktop. Muestra un
+                    temporizador en pantalla y tres botones: Arrancar, Parar y Reiniciar. El cronómetro actualiza
+                    el tiempo cada décima de segundo y lo muestra. El usuario puede controlar en todo momento el
+                    inicio, detención y reinicio del conteo.
+                </p>
+            </section>
+            <section>
+                <h4>Cronómetro PHP</h4>
+                <p>
+                    Muestra una versión del cronómetro implementada mediante PHP. Permite arrancar, parar y
+                    mostrar el tiempo transcurrido usando un formulario con tres botones. El cronómetro
+                    calcula el tiempo y la página muestra el resultado en formato mm:ss.s.
+                </p>
+            </section>
         </section>
-
-        <section>
-            <h3>Memoria</h3>
-            <p>
-                Juego de memoria con cartas.
-            </p>
-        </section>
-
-        <section>
-            <h3>Cronómetro</h3>
-            <p>
-                Cronómetro que se puede iniciar, parar y reiniciar y que se actualiza cada décima.
-            </p>
-        </section>
-
     </main>
 
 

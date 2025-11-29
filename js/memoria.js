@@ -68,7 +68,6 @@ class Memoria {
 
         this.#comprobarJuego();
         this.#reiniciarAtributos();
-        // PREGUNTAR SI SON PAREJA NO HAY TIMEOUT
     }
 
     #comprobarJuego() {
