@@ -24,7 +24,7 @@ section>div {
         height: 50vh;
     }
 
-    article h2+img {
+    section h2+img {
         width: 100%;
         height: auto;
     }

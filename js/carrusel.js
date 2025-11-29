@@ -67,7 +67,7 @@ class Carrusel {
         }
 
         const imagen = this.#imagenes[this.#actual];
-        const img = $("main article img");
+        const img = $("main section img");
         img.attr("src", imagen.url);
         img.attr("alt", imagen.title);
 
