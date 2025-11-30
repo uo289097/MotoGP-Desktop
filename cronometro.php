@@ -28,13 +28,10 @@ class Cronometro
     {
         $totalSegundos = $this->tiempo;
 
-        // Minutos enteros
         $minutos = floor($totalSegundos / 60);
 
-        // Segundos restantes con décimas
         $segundos = $totalSegundos - ($minutos * 60);
 
-        // Formato mm:ss.s
         return sprintf("%02d:%04.1f", $minutos, $segundos);
     }
 }
@@ -65,11 +62,12 @@ if (count($_POST) > 0) {
 
 <head>
     <meta charset="UTF-8" />
-    <title>MotoGP-Cronómetro</title>
+    <title>MotoGP-Cronómetro PHP</title>
 
     <meta name="author" content="Gabriel García Martínez" />
-    <meta name="description" content="Documento de juegos de MotoGP-Desktop" />
-    <meta name="keywords" content="MotoGP, cronometro" />
+    <meta name="description" content="Cronómetro PHP de MotoGP-Desktop: inicia, detén y muestra el tiempo. 
+        Hecho en PHP." />
+    <meta name="keywords" content="cronómetro PHP, medir tiempo PHP, cronómetro MotoGP Desktop" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
