@@ -64,3 +64,36 @@ POR SI NO ES VÁLIDO:
                 });
                 main.appendChild(ol);*/
 
+
+
+Clase Configuracion en configuracion.php (con los métodos para acceder a la BD)
+y demás y hacer un include de él donde esté el formulario
+Ni menú ni cabecera. Al hacer clic en ellas se abra en otra ventana. Se pueden usar
+las CSS.
+El cronómetro no se muestra y puede guardarse en milisegundos
+
+
+TABLAS:
+CREATE TABLE `usuario` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `profesion` varchar(100) NOT NULL,
+  `edad` int(10) UNSIGNED NOT NULL CHECK (`edad` between 12 and 105),
+  `genero` enum('masculino','femenino') NOT NULL,
+  `pericia_informatica` int(10) UNSIGNED NOT NULL CHECK (`pericia_informatica` between 0 and 10)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `resultado` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_usuario` int(10) UNSIGNED NOT NULL,
+  `dispositivo` enum('ordenador','tableta','telefono') NOT NULL,
+  `tiempo` float NOT NULL,
+  `completada` tinyint(1) NOT NULL,
+  `comentarios` text DEFAULT NULL,
+  `propuestas` text DEFAULT NULL,
+  `valoracion` int(11) NOT NULL CHECK (`valoracion` between 0 and 10)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `observacion` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_usuario` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

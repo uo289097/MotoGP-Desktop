@@ -39,6 +39,7 @@ header+p {
     font-size: 0.85em;
 }
 
+/* Especificidad 002*/
 h5~img {
     display: block;
     margin-bottom: 10px;
@@ -48,11 +49,13 @@ h5~img {
 
 @media (min-width: 460px) and (max-width: 799px) {
 
+    /*Especificidad 001*/
     video {
         width: 100%;
         height: auto;
     }
 
+    /*Especificidad 001*/
     audio {
         width: 100%;
     }
@@ -61,15 +64,18 @@ h5~img {
 
 @media (max-width: 459px) {
 
+    /* Especificidad 002*/
     header+p {
         display: none;
     }
 
+    /* Especificidad 001*/
     video {
         width: 100%;
         height: auto;
     }
 
+    /* Especificidad 001*/
     audio {
         width: 100%;
     }

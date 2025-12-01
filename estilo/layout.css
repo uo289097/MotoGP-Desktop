@@ -14,16 +14,20 @@ section>div {
 }
 
 @media (min-width: 320px) and (max-width: 799px) {
+
+    /* Especificidad 001*/
     header {
         display: flex;
         flex-direction: column;
     }
 
+    /* Especificidad 002*/
     section>div {
         width: 100%;
         height: 50vh;
     }
 
+    /* Especificidad 003*/
     section h2+img {
         width: 100%;
         height: auto;
