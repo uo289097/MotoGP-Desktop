@@ -20,7 +20,6 @@ class Cronometro
     public function parar()
     {
         $actual = microtime(true);
-
         $this->tiempo = $actual - $this->inicio;
     }
 
@@ -41,9 +40,9 @@ if (!isset($_SESSION['cronometro'])) {
 }
 
 $c = $_SESSION['cronometro'];
-if (count($_POST) > 0) {
+$tiempoFinal = "";
 
-    $tiempoFinal = "";
+if (count($_POST) > 0) {
 
     if (isset($_POST['botonArrancar']))
         $c->arrancar();
