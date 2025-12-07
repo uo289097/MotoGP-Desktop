@@ -185,23 +185,23 @@ class Test
     {
         echo '
         <form method="post"> 
-            <label>Profesión</label> 
-            <input type="text" name="p1" required> 
+            <label for="p1">Profesión</label> 
+            <input type="text" name="p1" id="p1" required> 
             
-            <label>Edad</label> 
-            <input type="number" min="3" max="120" name="p2" required> 
+            <label for="p2">Edad</label> 
+            <input type="number" min="3" max="120" name="p2" id="p2" required> 
             
             <label for="genero">Género</label> 
-            <select id="genero" name="genero"> 
+            <select id="genero" name="genero" id="genero"> 
                 <option value="masculino">Masculino</option> 
                 <option value="femenino">Femenino</option> 
             </select> 
             
-            <label>Pericia informática</label> 
-            <input type="number" min="0" max="10" name="p4" required> 
+            <label for="p4">Pericia informática</label> 
+            <input type="number" min="0" max="10" name="p4" id="p4" required> 
             
             <label for="dispositivo">Dispositivo</label> 
-            <select id="dispositivo" name="dispositivo"> 
+            <select id="dispositivo" name="dispositivo" id="dispositivo"> 
                 <option value="ordenador">Ordenador</option> 
                 <option value="tableta">Tableta</option> 
                 <option value="movil">Móvil</option> 
@@ -216,59 +216,60 @@ class Test
     {
         echo '
         <form method="post">
+            <label for="p1">1. ¿Cuál es el país de nacimiento de Joan Mir?</label>
+            <input type="text" id="p1" name="p1" required>
 
-            <label>1. País nacimiento</label>
-            <input type="text" name="p1" required>
+            <label for="p2">2. ¿Cuál es el año de nacimiento de Joan Mir?</label>
+            <input type="number" id="p2" name="p2" required>
 
-            <label>2. Año nacimiento</label>
-            <input type="number" name="p2" required>
+            <label for="p3">3. ¿Con qué edad empezó a correr en minimotos?</label>
+            <input type="number" id="p3" name="p3" required>
 
-            <label>3. Edad minimotos</label>
-            <input type="number" name="p3" required>
-
-            <label>4. Baturiti +50k hab?</label>
-            <select name="baturiti">
+            <label for="baturiti">4. ¿Tiene Baturiti más de 50 mil habitantes?</label>
+            <select id="baturiti" name="baturiti">
                 <option value="sí">Sí</option>
                 <option value="no">No</option>
             </select>
 
-            <label>5. Llovió?</label>
-            <select name="lluvia">
+            <label for="lluvia">5. ¿Llovió en Mandalika el día de la carrera?</label>
+            <select id="lluvia" name="lluvia">
                 <option value="sí">Sí</option>
                 <option value="no">No</option>
             </select>
 
-            <label>6. Ganador Mandalika</label>
-            <input type="text" name="p6" required>
+            <label for="p6">6. ¿Quién ganó la carrera de Mandalika de MotoGP?</label>
+            <input type="text" id="p6" name="p6" required>
 
-            <label>7. Líder mundial</label>
-            <input type="text" name="p7" required>
+            <label for="p7">7. ¿Quién era el líder del mundial de MotoGP tras la carrera de Mandalika?</label>
+            <input type="text" id="p7" name="p7" required>
 
-            <label>8. Puntos líder</label>
-            <input type="number" name="p8" required>
+            <label for="p8">8. ¿Cuántos puntos tenía el líder del mundial tras la carrera de Mandalika?</label>
+            <input type="number" id="p8" name="p8" required>
 
-            <label>9. Segundo mundial</label>
-            <input type="text" name="p9" required>
+            <label for="p9">9. ¿Quién era el segundo del mundial tras la carrera de Mandalika?</label>
+            <input type="text" id="p9" name="p9" required>
 
-            <label>10. Tercero mundial</label>
-            <input type="text" name="p10" required>
+            <label for="p10">10. ¿Quién era el tercero del mundial tras la carrera de Mandalika?</label>
+            <input type="text" id="p10" name="p10" required>
 
             <input type="submit" name="accion" value="Continuar Test">
-        </form>';
+        </form';
     }
 
     private function formPaso3()
     {
         echo '
         <form method="post">
-            <label>Comentarios</label>
-            <input type="text" name="p11">
+            <label for="p11">Comentarios</label>
+            <textarea name="p11" id="p11" rows="5" cols="40">
+            </textarea>
 
-            <label>Propuestas</label>
-            <input type="text" name="p12">
+            <label for="p12">Propuestas de mejora</label>
+            <textarea name="p12" id="p12" rows="5" cols="40">
+            </textarea>
 
-            <label>Valoración</label>
-            <input type="number" name="p13" min="0" max="10" required>
+            <label for="p12">Valoración de la aplicación</label>
+            <input type="number" name="p13" id="p13" min="0" max="10" required>
 
             <input type="submit" value="Continuar" required>
         </form>';
@@ -278,8 +279,9 @@ class Test
     {
         echo '
         <form method="post">
-            <label>Comentarios del facilitador</label>
-            <input type="text" name="p1">
+            <label for="p1">Comentarios del facilitador</label>
+            <textarea name="p1" id="p1" rows="5" cols="40">
+            </textarea>
 
             <input type="submit" value="Guardar">
         </form>';

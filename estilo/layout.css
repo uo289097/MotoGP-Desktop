@@ -13,6 +13,12 @@ section>div {
     max-width: 850px;
 }
 
+/* Especificidad 002*/
+form label {
+    display: block;
+    margin-bottom: 7px;
+}
+
 @media (min-width: 320px) and (max-width: 799px) {
 
     /* Especificidad 001*/
