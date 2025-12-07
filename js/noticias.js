@@ -25,7 +25,7 @@ class Noticias {
     }
 
     #procesarInformacion(datos) {
-        let noticias = [];              // TODO LET???
+        var noticias = [];
         for (let i = 0; i < datos.data.length; i++) {
             const title = datos.data[i].title;
             const entradilla = datos.data[i].description;

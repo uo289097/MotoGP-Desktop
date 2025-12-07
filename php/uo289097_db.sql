@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 CREATE TABLE IF NOT EXISTS `observacion` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_usuario` int(10) UNSIGNED NOT NULL,
+  `comentarios` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `observacion_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -65,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `resultado` (
   `comentarios` text DEFAULT NULL,
   `propuestas` text DEFAULT NULL,
   `valoracion` int(11) NOT NULL CHECK (`valoracion` between 0 and 10),
+  `nota` int(11) NOT NULL CHECK (`nota` between 0 and 10),
   PRIMARY KEY (`id`),
   CONSTRAINT `resultado_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

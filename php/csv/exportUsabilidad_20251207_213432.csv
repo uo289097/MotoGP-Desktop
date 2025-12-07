@@ -1,0 +1,9 @@
+### Tabla: usuario
+id,profesion,edad,genero,pericia_informatica
+
+### Tabla: resultado
+id,id_usuario,dispositivo,tiempo,completada,comentarios,propuestas,valoracion,nota
+
+### Tabla: observacion
+id,id_usuario,comentarios
+

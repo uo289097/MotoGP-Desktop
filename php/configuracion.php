@@ -62,7 +62,7 @@ class Configuracion
             $tablas = ["usuario", "resultado", "observacion"];
 
             $filename = "exportUsabilidad_" . date("Ymd_His") . ".csv";
-            $filepath = __DIR__ . "/" . $filename;
+            $filepath = __DIR__ . "/csv/" . $filename;
 
             $file = fopen($filepath, "w");
 
@@ -109,6 +109,129 @@ class Configuracion
             die("Error ejecutando SQL: " . $this->db->error);
         }
     }
+
+    public function guardarDatosUsuario($profesion, $edad, $genero, $pericia)
+    {
+        if (!$this->connection) {
+            return false;
+        }
+
+        // Sentencia preparada para evitar SQL Injection
+        $stmt = $this->db->prepare("
+            INSERT INTO usuario (profesion, edad, genero, pericia_informatica)
+            VALUES (?, ?, ?, ?)");
+
+        if (!$stmt) {
+            die("Error preparando sentencia: " . $this->db->error);
+        }
+
+        $stmt->bind_param("sisi", $profesion, $edad, $genero, $pericia);
+
+        $exito = $stmt->execute();
+
+        if (!$exito) {
+            die("Error ejecutando INSERT: " . $stmt->error);
+        }
+
+        $idUsuario = $this->db->insert_id;
+
+        $stmt->close();
+
+        return $idUsuario;
+    }
+
+    public function guardarDatosTest(
+        $idUsuario,
+        $dispositivo,
+        $nota,
+        $tiempo,
+        $comentarios,
+        $propuestas,
+        $valoracion
+    ) {
+        if (!$this->connection) {
+            return false;
+        }
+
+        $stmt = $this->db->prepare("
+        INSERT INTO resultado (
+            id_usuario, dispositivo, tiempo, completada,
+            comentarios, propuestas, valoracion, nota
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    ");
+
+        if (!$stmt) {
+            die("Error preparando sentencia: " . $this->db->error);
+        }
+
+        // Tipos: i = int, s = string, d = double
+        // completada = 1 (test completado)
+        $completada = 1;
+
+        $stmt->bind_param(
+            "isidssii",
+            $idUsuario,
+            $dispositivo,
+            $tiempo,
+            $completada,
+            $comentarios,
+            $propuestas,
+            $valoracion,
+            $nota
+        );
+
+        $exito = $stmt->execute();
+
+        if (!$exito) {
+            die("Error ejecutando INSERT: " . $stmt->error);
+        }
+
+        $stmt->close();
+
+        return true;
+    }
+
+    public function guardarDatosObservador(
+        $idUsuario,
+        $comentarios
+    ) {
+        if (!$this->connection) {
+            return false;
+        }
+
+        $stmt = $this->db->prepare("
+        INSERT INTO observacion (
+            id_usuario, comentarios
+        )
+        VALUES (?, ?)
+    ");
+
+        if (!$stmt) {
+            die("Error preparando sentencia: " . $this->db->error);
+        }
+
+        // Tipos: i = int, s = string, d = double
+        // completada = 1 (test completado)
+        $completada = 1;
+
+        $stmt->bind_param(
+            "is",
+            $idUsuario,
+            $comentarios
+        );
+
+        $exito = $stmt->execute();
+
+        if (!$exito) {
+            die("Error ejecutando INSERT: " . $stmt->error);
+        }
+
+        $stmt->close();
+
+        return true;
+    }
+
 }
 
 ?>

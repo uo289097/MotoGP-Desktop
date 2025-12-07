@@ -1,39 +1,8 @@
 <?php
 
+require_once "php/cronometro_logic.php";
+
 session_start();
-class Cronometro
-{
-
-    private $tiempo;
-    private $inicio;
-
-    public function __construct()
-    {
-        $this->tiempo = 0;
-    }
-
-    public function arrancar()
-    {
-        $this->inicio = microtime(true);
-    }
-
-    public function parar()
-    {
-        $actual = microtime(true);
-        $this->tiempo = $actual - $this->inicio;
-    }
-
-    public function mostrar()
-    {
-        $totalSegundos = $this->tiempo;
-
-        $minutos = floor($totalSegundos / 60);
-
-        $segundos = $totalSegundos - ($minutos * 60);
-
-        return sprintf("%02d:%04.1f", $minutos, $segundos);
-    }
-}
 
 if (!isset($_SESSION['cronometro'])) {
     $_SESSION['cronometro'] = new Cronometro();
