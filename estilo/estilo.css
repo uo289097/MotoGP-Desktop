@@ -71,12 +71,15 @@ h5~img {
 
     /* Especificidad 001*/
     video {
+        /* Se produce advertencia por redefinición en media query */
         width: 100%;
+        /* Se produce advertencia por redefinición en media query */
         height: auto;
     }
 
     /* Especificidad 001*/
     audio {
+        /* Se produce advertencia por redefinición en media query */
         width: 100%;
     }
 }

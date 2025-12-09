@@ -23,13 +23,17 @@ form label {
 
     /* Especificidad 001*/
     header {
+        /* Se produce advertencia por redefinición en media query */
         display: flex;
+        /* Se produce advertencia por redefinición en media query */
         flex-direction: column;
     }
 
     /* Especificidad 002*/
     section>div {
+        /* Se produce advertencia por redefinición en media query */
         width: 100%;
+        /* Se produce advertencia por redefinición en media query */
         height: 50vh;
     }
 

@@ -19,9 +19,7 @@ class Test
         }
     }
 
-    // --------------------------
-    // MÉTODO PRINCIPAL
-    // --------------------------
+
     public function procesar()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -31,16 +29,12 @@ class Test
         $this->mostrarFormulario();
     }
 
-    // --------------------------
-    // PROCESA EL FORMULARIO RECIBIDO
-    // --------------------------
     private function procesarFormulario()
     {
         $paso = $_SESSION["paso"];
 
         switch ($paso) {
 
-            // PASO 1 → PASO 2
             case 1:
                 if (isset($_POST["p1"], $_POST["p2"])) {
                     $profesion = $_POST["p1"];
@@ -49,7 +43,6 @@ class Test
                     $pericia = $_POST["p4"];
                     $_SESSION["dispositivo"] = $_POST["dispositivo"];
 
-                    // Guardar datos en la configuración
                     $this->id = $this->config->guardarDatosUsuario(
                         $profesion,
                         $edad,
@@ -65,7 +58,6 @@ class Test
                 }
                 break;
 
-            // PASO 2 (Test) → PASO 3
             case 2:
                 if (isset($_POST["accion"]) && $_POST["accion"] == "Continuar Test") {
                     $this->crono = $_SESSION["crono"];
@@ -78,7 +70,6 @@ class Test
                 }
                 break;
 
-            // PASO 3 → PASO 4
             case 3:
                 if (isset($_POST["p13"])) {
                     $comentarios = $_POST["p11"];
@@ -99,7 +90,6 @@ class Test
                 }
                 break;
 
-            // PASO 4 → PASO 5 (Fin)
             case 4:
                 if (isset($_POST["p1"])) {
                     $idUsuario = $_SESSION['id_usuario'];
@@ -114,9 +104,6 @@ class Test
         }
     }
 
-    // --------------------------
-    // CORREGIR TEST (OOP)
-    // --------------------------
     private function corregirTest($respuestas)
     {
         $correctas = [
@@ -146,9 +133,6 @@ class Test
         return $nota;
     }
 
-    // --------------------------
-    // PINTAR EL FORMULARIO CORRESPONDIENTE
-    // --------------------------
     private function mostrarFormulario()
     {
         $paso = $_SESSION["paso"];
@@ -172,14 +156,11 @@ class Test
                 break;
 
             case 5:
-                echo "<p>✔ Datos guardados correctamente. Gracias.</p>";
+                echo "<p>✔ Test respondido correctamente. Gracias.</p>";
                 break;
         }
     }
 
-    // --------------------------
-    // FORMULARIOS
-    // --------------------------
 
     private function formPaso1()
     {
@@ -192,10 +173,7 @@ class Test
             <input type="number" min="3" max="120" name="p2" id="p2" required> 
             
             <label for="genero">Género</label> 
-            <select id="genero" name="genero" id="genero"> 
-                <option value="masculino">Masculino</option> 
-                <option value="femenino">Femenino</option> 
-            </select> 
+            <input type="text" name="genero" id="genero" required> 
             
             <label for="p4">Pericia informática</label> 
             <input type="number" min="0" max="10" name="p4" id="p4" required> 
@@ -207,8 +185,7 @@ class Test
                 <option value="movil">Móvil</option> 
             </select> 
             
-            <br><br> 
-            <input type="submit" value="Continuar al test"> 
+            <input type="submit" name="accion" value="Continuar al test"> 
         </form>';
     }
 
@@ -226,16 +203,10 @@ class Test
             <input type="number" id="p3" name="p3" required>
 
             <label for="baturiti">4. ¿Tiene Baturiti más de 50 mil habitantes?</label>
-            <select id="baturiti" name="baturiti">
-                <option value="sí">Sí</option>
-                <option value="no">No</option>
-            </select>
+            <input type="text" name="baturiti" id="baturiti" required>
 
             <label for="lluvia">5. ¿Llovió en Mandalika el día de la carrera?</label>
-            <select id="lluvia" name="lluvia">
-                <option value="sí">Sí</option>
-                <option value="no">No</option>
-            </select>
+            <input type="text" name="lluvia" id="lluvia" required>
 
             <label for="p6">6. ¿Quién ganó la carrera de Mandalika de MotoGP?</label>
             <input type="text" id="p6" name="p6" required>
@@ -271,7 +242,7 @@ class Test
             <label for="p12">Valoración de la aplicación</label>
             <input type="number" name="p13" id="p13" min="0" max="10" required>
 
-            <input type="submit" value="Continuar" required>
+            <input type="submit" name="accion" value="Continuar">
         </form>';
     }
 
@@ -283,7 +254,7 @@ class Test
             <textarea name="p1" id="p1" rows="5" cols="40">
             </textarea>
 
-            <input type="submit" value="Guardar">
+            <input type="submit" name="accion" value="Guardar">
         </form>';
     }
 }

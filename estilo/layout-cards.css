@@ -34,8 +34,10 @@ main>p {
 
     /* Especificidad: 001 */
     main {
+        /* Se produce advertencia por redefinición en media query */
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: auto repeat(6, 1fr);
+        /* Se produce advertencia por redefinición en media query */
         gap: 1em;
     }
 }

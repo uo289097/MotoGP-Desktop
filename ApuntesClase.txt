@@ -97,3 +97,18 @@ CREATE TABLE `observacion` (
   `id` int(10) UNSIGNED NOT NULL,
   `id_usuario` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+<select id="genero" name="genero" id="genero"> 
+    <option value="masculino">Masculino</option> 
+    <option value="femenino">Femenino</option> 
+</select> 
+
+<select id="baturiti" name="baturiti">
+    <option value="sí">Sí</option>
+    <option value="no">No</option>
+</select>
+
+<select id="lluvia" name="lluvia">
+    <option value="sí">Sí</option>
+    <option value="no">No</option>
+</select>
