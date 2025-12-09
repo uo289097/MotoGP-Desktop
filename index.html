@@ -38,21 +38,17 @@
 
     <p>Estás en [<strong>Inicio</strong>]</p>
     <main>
-        <section>
-            <script>
-                $(document).ready(function () {
-                    const carrusel = new Carrusel("mandalika, motogp");
-                    carrusel.getFotografias();
-                });
-            </script>
-        </section>
-        <section>
-            <script>
-                const noticias = new Noticias("MotoGP");
-                noticias.buscar();
-            </script>
-        </section>
     </main>
+    <script>
+        $(document).ready(function () {
+            const carrusel = new Carrusel("mandalika, motogp");
+            carrusel.getFotografias();
+        });
+        $(document).ready(function () {
+            const noticias = new Noticias("MotoGP");
+            noticias.buscar();
+        });
+    </script>
 </body>
 
 </html>

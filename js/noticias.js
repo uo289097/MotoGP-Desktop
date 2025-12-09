@@ -38,7 +38,7 @@ class Noticias {
     }
 
     #mostrarNoticias(noticias) {
-        const section = $("main > section:nth-of-type(2)");
+        const section = $("<section>");
 
         const h2 = $("<h2>").text("Noticias de MotoGP");
         section.append(h2);
@@ -54,5 +54,6 @@ class Noticias {
             const article = $("<article>").append(h3, entradilla, url, source);
             section.append(article);
         }
+        $("main").append(section);
     }
 }
