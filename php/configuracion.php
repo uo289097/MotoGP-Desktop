@@ -62,7 +62,14 @@ class Configuracion
             $tablas = ["usuario", "resultado", "observacion"];
 
             $filename = "exportUsabilidad_" . date("Ymd_His") . ".csv";
-            $filepath = __DIR__ . "/csv/" . $filename;
+            $dir = __DIR__ . "/csv/";
+
+            // Crear la carpeta si no existe
+            if (!is_dir($dir)) {
+                mkdir($dir, 0777, true); // true = crear recursivamente si hiciera falta
+            }
+
+            $filepath = $dir . $filename;
 
             $file = fopen($filepath, "w");
 
@@ -147,7 +154,8 @@ class Configuracion
         $tiempo,
         $comentarios,
         $propuestas,
-        $valoracion
+        $valoracion,
+        $completada
     ) {
         if (!$this->connection) {
             return false;
@@ -166,8 +174,6 @@ class Configuracion
         }
 
         // Tipos: i = int, s = string, d = double
-        // completada = 1 (test completado)
-        $completada = 1;
 
         $stmt->bind_param(
             "isidssii",
@@ -210,10 +216,6 @@ class Configuracion
         if (!$stmt) {
             die("Error preparando sentencia: " . $this->db->error);
         }
-
-        // Tipos: i = int, s = string, d = double
-        // completada = 1 (test completado)
-        $completada = 1;
 
         $stmt->bind_param(
             "is",

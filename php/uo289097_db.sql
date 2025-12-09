@@ -33,7 +33,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `usuario` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `profesion` varchar(100) NOT NULL,
-  `edad` int(10) UNSIGNED NOT NULL CHECK (`edad` between 12 and 105),
+  `edad` int(10) UNSIGNED NOT NULL CHECK (`edad` between 3 and 120),
   `genero` enum('masculino','femenino') NOT NULL,
   `pericia_informatica` int(10) UNSIGNED NOT NULL CHECK (`pericia_informatica` between 0 and 10),
   PRIMARY KEY (`id`)

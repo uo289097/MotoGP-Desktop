@@ -36,7 +36,7 @@ class Test
         switch ($paso) {
 
             case 1:
-                if (isset($_POST["p1"], $_POST["p2"])) {
+                if (isset($_POST["accion"]) && $_POST["accion"] == "Continuar al test") {
                     $profesion = $_POST["p1"];
                     $edad = $_POST["p2"];
                     $genero = $_POST["genero"];
@@ -71,7 +71,7 @@ class Test
                 break;
 
             case 3:
-                if (isset($_POST["p13"])) {
+                if (isset($_POST["accion"]) && $_POST["accion"] == "Continuar") {
                     $comentarios = $_POST["p11"];
                     $propuestas = $_POST["p12"];
                     $valoracion = $_POST["p13"];
@@ -83,7 +83,8 @@ class Test
                         $_SESSION["tiempo"],
                         $comentarios,
                         $propuestas,
-                        $valoracion
+                        $valoracion,
+                        $_SESSION["completado"]
                     );
 
                     $_SESSION["paso"] = 4;
@@ -91,7 +92,7 @@ class Test
                 break;
 
             case 4:
-                if (isset($_POST["p1"])) {
+                if (isset($_POST["accion"]) && $_POST["accion"] == "Guardar") {
                     $idUsuario = $_SESSION['id_usuario'];
                     $comentarios = $_POST["p1"];
                     $this->config->guardarDatosObservador(
@@ -106,22 +107,31 @@ class Test
 
     private function corregirTest($respuestas)
     {
+        $campos = ["p1", "p2", "p3", "baturiti", "lluvia", "p6", "p7", "p8", "p9", "p10"];
         $correctas = [
-            "p1" => "España",
-            "p2" => "1997",
-            "p3" => "10",
-            "baturiti" => "sí",
-            "lluvia" => "no",
-            "p6" => "F.Aldeguer",
-            "p7" => "Marc Márquez",
-            "p8" => "545",
-            "p9" => "Álex Márquez",
-            "p10" => "Pecco Bagnaia"
+            "España",
+            "1997",
+            "10",
+            "sí",
+            "no",
+            "F.Aldeguer",
+            "Marc Márquez",
+            "545",
+            "Álex Márquez",
+            "Pecco Bagnaia"
         ];
 
         $nota = 0;
+        $completo = 1;
 
-        foreach ($correctas as $campo => $ok) {
+        for ($i = 0; $i < count($campos); $i++) {
+
+            $campo = $campos[$i];
+            $ok = $correctas[$i];
+
+            if (!isset($respuestas[$campo]) || trim($respuestas[$campo]) === "") {
+                $completo = 0;
+            }
             if (
                 isset($respuestas[$campo]) &&
                 strtolower(trim($respuestas[$campo])) === strtolower($ok)
@@ -129,6 +139,8 @@ class Test
                 $nota++;
             }
         }
+
+        $_SESSION["completado"] = $completo;
 
         return $nota;
     }
@@ -157,6 +169,14 @@ class Test
 
             case 5:
                 echo "<p>✔ Test respondido correctamente. Gracias.</p>";
+                $_SESSION["paso"] = 1;
+                unset(
+                    $_SESSION["nota"],
+                    $_SESSION["completado"],
+                    $_SESSION["tiempo"],
+                    $_SESSION["crono"],
+                    $_SESSION["id_usuario"]
+                );
                 break;
         }
     }
@@ -173,7 +193,13 @@ class Test
             <input type="number" min="3" max="120" name="p2" id="p2" required> 
             
             <label for="genero">Género</label> 
-            <input type="text" name="genero" id="genero" required> 
+            <select id="genero" name="genero" id="genero"> 
+                <option value="seleccione">Seleccione una</option>
+                <option value="masculino">Masculino</option> 
+                <option value="femenino">Femenino</option> 
+                <option value="otro">Otro</option> 
+            </select> 
+
             
             <label for="p4">Pericia informática</label> 
             <input type="number" min="0" max="10" name="p4" id="p4" required> 
@@ -194,34 +220,40 @@ class Test
         echo '
         <form method="post">
             <label for="p1">1. ¿Cuál es el país de nacimiento de Joan Mir?</label>
-            <input type="text" id="p1" name="p1" required>
+            <input type="text" id="p1" name="p1">
 
             <label for="p2">2. ¿Cuál es el año de nacimiento de Joan Mir?</label>
-            <input type="number" id="p2" name="p2" required>
+            <input type="number" id="p2" name="p2">
 
             <label for="p3">3. ¿Con qué edad empezó a correr en minimotos?</label>
-            <input type="number" id="p3" name="p3" required>
+            <input type="number" id="p3" name="p3">
 
             <label for="baturiti">4. ¿Tiene Baturiti más de 50 mil habitantes?</label>
-            <input type="text" name="baturiti" id="baturiti" required>
+            <select id="baturiti" name="baturiti">
+                <option value="sí">Sí</option>
+                <option value="no">No</option>
+            </select>
 
             <label for="lluvia">5. ¿Llovió en Mandalika el día de la carrera?</label>
-            <input type="text" name="lluvia" id="lluvia" required>
+            <select id="lluvia" name="lluvia">
+                <option value="sí">Sí</option>
+                <option value="no">No</option>
+            </select>
 
             <label for="p6">6. ¿Quién ganó la carrera de Mandalika de MotoGP?</label>
-            <input type="text" id="p6" name="p6" required>
+            <input type="text" id="p6" name="p6">
 
             <label for="p7">7. ¿Quién era el líder del mundial de MotoGP tras la carrera de Mandalika?</label>
-            <input type="text" id="p7" name="p7" required>
+            <input type="text" id="p7" name="p7">
 
             <label for="p8">8. ¿Cuántos puntos tenía el líder del mundial tras la carrera de Mandalika?</label>
-            <input type="number" id="p8" name="p8" required>
+            <input type="number" id="p8" name="p8">
 
             <label for="p9">9. ¿Quién era el segundo del mundial tras la carrera de Mandalika?</label>
-            <input type="text" id="p9" name="p9" required>
+            <input type="text" id="p9" name="p9">
 
             <label for="p10">10. ¿Quién era el tercero del mundial tras la carrera de Mandalika?</label>
-            <input type="text" id="p10" name="p10" required>
+            <input type="text" id="p10" name="p10">
 
             <input type="submit" name="accion" value="Continuar Test">
         </form';
@@ -232,12 +264,10 @@ class Test
         echo '
         <form method="post">
             <label for="p11">Comentarios</label>
-            <textarea name="p11" id="p11" rows="5" cols="40">
-            </textarea>
+            <textarea name="p11" id="p11" rows="5" cols="40"></textarea>
 
             <label for="p12">Propuestas de mejora</label>
-            <textarea name="p12" id="p12" rows="5" cols="40">
-            </textarea>
+            <textarea name="p12" id="p12" rows="5" cols="40"></textarea>
 
             <label for="p12">Valoración de la aplicación</label>
             <input type="number" name="p13" id="p13" min="0" max="10" required>
@@ -251,8 +281,7 @@ class Test
         echo '
         <form method="post">
             <label for="p1">Comentarios del facilitador</label>
-            <textarea name="p1" id="p1" rows="5" cols="40">
-            </textarea>
+            <textarea name="p1" id="p1" rows="5" cols="40"></textarea>
 
             <input type="submit" name="accion" value="Guardar">
         </form>';

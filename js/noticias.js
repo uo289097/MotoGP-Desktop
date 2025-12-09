@@ -54,6 +54,5 @@ class Noticias {
             const article = $("<article>").append(h3, entradilla, url, source);
             section.append(article);
         }
-
     }
 }

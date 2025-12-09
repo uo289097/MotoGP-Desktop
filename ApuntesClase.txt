@@ -112,3 +112,8 @@ CREATE TABLE `observacion` (
     <option value="sí">Sí</option>
     <option value="no">No</option>
 </select>
+
+
+MEJORAS -> 
+    LOS OPTION, TAMBIÉN LOS SELECCIONE UNA
+    AYUDA CIRCUITO
