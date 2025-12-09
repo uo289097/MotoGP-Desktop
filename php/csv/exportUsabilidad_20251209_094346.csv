@@ -1,0 +1,12 @@
+### Tabla: usuario
+id,profesion,edad,genero,pericia_informatica
+1,Profesor,19,masculino,10
+
+### Tabla: resultado
+id,id_usuario,dispositivo,tiempo,completada,comentarios,propuestas,valoracion,nota
+1,1,ordenador,35,1,"            ","            ",10,7
+
+### Tabla: observacion
+id,id_usuario,comentarios
+1,1,"            "
+
