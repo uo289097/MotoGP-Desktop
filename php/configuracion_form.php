@@ -12,6 +12,10 @@ if (count($_POST) > 0) {
         $c->exportar();
     if (isset($_POST['botonInicializar']))
         $c->inicializar();
+    if (isset($_POST['botonImportar']) && isset($_FILES['archivoCSV'])) {
+        $rutaTemp = $_FILES['archivoCSV']['tmp_name'];
+        $c->importarCSV($rutaTemp);
+    }
 }
 ?>
 
@@ -33,10 +37,24 @@ if (count($_POST) > 0) {
         </header>
         <h2>Configuración</h2>
         <form action="#" method="post" name="configuración">
-            <input type="submit" name="botonReiniciar" value="Reiniciar BD" />
-            <input type="submit" name="botonEliminar" value="Eliminar BD" />
-            <input type="submit" name="botonExportar" value="Exportar BD" />
-            <input type="submit" name="botonInicializar" value="Inicializar BD" />
+            <label for="botonReiniciar">Reiniciar base de datos</label>
+            <input type="submit" id="botonReiniciar" name="botonReiniciar" value="Reiniciar BD" />
+
+            <label for="botonEliminar">Eliminar base de datos</label>
+            <input type="submit" id="botonEliminar" name="botonEliminar" value="Eliminar BD" />
+
+            <label for="botonExportar">Exportar base de datos</label>
+            <input type="submit" id="botonExportar" name="botonExportar" value="Exportar BD" />
+
+            <label for="botonInicializar">Inicializar base de datos</label>
+            <input type="submit" id="botonInicializar" name="botonInicializar" value="Inicializar BD" />
+        </form>
+        <form action="#" method="post" enctype="multipart/form-data">
+            <label for="archivoCSV">Seleccionar archivo CSV</label>
+            <input type="file" id="archivoCSV" name="archivoCSV" accept=".csv">
+
+            <label for="botonImportar">Importar datos desde CSV</label>
+            <input type="submit" id="botonImportar" name="botonImportar" value="Importar CSV">
         </form>
     </main>
 </body>

@@ -234,6 +234,56 @@ class Configuracion
         return true;
     }
 
+    public function importarCSV($rutaArchivo)
+    {
+        if (!$this->connection || !file_exists($rutaArchivo)) {
+            return false;
+        }
+
+        $file = fopen($rutaArchivo, "r");
+
+        $tablaActual = null;
+        $columnas = [];
+
+        while (($linea = fgets($file)) !== false) {
+            $linea = trim($linea);
+
+            if ($linea === "") {
+                continue;
+            }
+
+            if (str_starts_with($linea, "### Tabla:")) {
+                $tablaActual = trim(str_replace("### Tabla:", "", $linea));
+                $columnas = [];
+                continue;
+            }
+
+            if ($tablaActual && empty($columnas)) {
+                $columnas = str_getcsv($linea);
+                continue;
+            }
+
+            if ($tablaActual && !empty($columnas)) {
+                $valores = str_getcsv($linea);
+
+                $colsSQL = implode(",", $columnas);
+                $placeholders = implode(",", array_fill(0, count($valores), "?"));
+
+                $sql = "INSERT INTO $tablaActual ($colsSQL) VALUES ($placeholders)";
+                $stmt = $this->db->prepare($sql);
+
+                $tipos = str_repeat("s", count($valores));
+                $stmt->bind_param($tipos, ...$valores);
+
+                $stmt->execute();
+                $stmt->close();
+            }
+        }
+
+        fclose($file);
+        return true;
+    }
+
 }
 
 ?>
