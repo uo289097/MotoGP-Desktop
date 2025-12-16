@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `observacion` (
 CREATE TABLE IF NOT EXISTS `resultado` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_usuario` int(10) UNSIGNED NOT NULL,
-  `dispositivo` enum('ordenador','tableta','telefono') NOT NULL,
+  `dispositivo` enum('ordenador','tableta','movil') NOT NULL,
   `tiempo` float NOT NULL,
   `completada` tinyint(1) NOT NULL,
   `comentarios` text DEFAULT NULL,

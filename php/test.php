@@ -118,7 +118,7 @@ class Test
             "Marc Márquez",
             "545",
             "Álex Márquez",
-            "Pecco Bagnaia"
+            "27"
         ];
 
         $nota = 0;
@@ -252,7 +252,7 @@ class Test
             <label for="p9">9. ¿Quién era el segundo del mundial tras la carrera de Mandalika?</label>
             <input type="text" id="p9" name="p9">
 
-            <label for="p10">10. ¿Quién era el tercero del mundial tras la carrera de Mandalika?</label>
+            <label for="p10">10. ¿Cuántas vueltas tiene la carrera de Mandalika de MotoGP?</label>
             <input type="text" id="p10" name="p10">
 
             <input type="submit" name="accion" value="Continuar Test">
