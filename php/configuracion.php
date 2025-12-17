@@ -58,42 +58,65 @@ class Configuracion
 
     public function exportar()
     {
-        if ($this->connection) {
-            $tablas = ["usuario", "resultado", "observacion"];
-
-            $filename = "exportUsabilidad_" . date("Ymd_His") . ".csv";
-            $dir = __DIR__ . "/csv/";
-
-            // Crear la carpeta si no existe
-            if (!is_dir($dir)) {
-                mkdir($dir, 0777, true); // true = crear recursivamente si hiciera falta
-            }
-
-            $filepath = $dir . $filename;
-
-            $file = fopen($filepath, "w");
-
-            foreach ($tablas as $tabla) {
-
-                fwrite($file, "### Tabla: $tabla\n");
-
-                $result = $this->db->query("SELECT * FROM $tabla");
-
-                $headers = [];
-                while ($finfo = $result->fetch_field()) {
-                    $headers[] = $finfo->name;
-                }
-                fputcsv($file, $headers);
-
-                while ($row = $result->fetch_assoc()) {
-                    fputcsv($file, $row);
-                }
-
-                fwrite($file, "\n");
-            }
-
-            fclose($file);
+        if (!$this->connection) {
+            return;
         }
+
+        $filename = "exportUsabilidad_" . date("Ymd_His") . ".csv";
+        $dir = __DIR__ . "/csv/";
+
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
+
+        $filepath = $dir . $filename;
+        $file = fopen($filepath, "w");
+
+        $headers = [
+            "id",
+            "profesion",
+            "edad",
+            "genero",
+            "pericia_informatica",
+            "dispositivo",
+            "tiempo",
+            "completada",
+            "comentarios",
+            "propuestas",
+            "valoracion",
+            "nota",
+            "observaciones"
+        ];
+
+        fputcsv($file, $headers);
+
+        // Consulta unificada
+        $sql = "SELECT 
+            u.id,
+            u.profesion,
+            u.edad,
+            u.genero,
+            u.pericia_informatica,
+            r.dispositivo,
+            r.tiempo,
+            r.completada,
+            r.comentarios,
+            r.propuestas,
+            r.valoracion,
+            r.nota,
+            o.comentarios AS observaciones
+            FROM usuario u
+            LEFT JOIN resultado r ON u.id = r.id_usuario
+            LEFT JOIN observacion o ON u.id = o.id_usuario
+            ORDER BY u.id";
+
+        $result = $this->db->query($sql);
+
+        while ($row = $result->fetch_assoc()) {
+            fputcsv($file, $row);
+        }
+
+        fclose($file);
 
     }
 
@@ -242,39 +265,65 @@ class Configuracion
 
         $file = fopen($rutaArchivo, "r");
 
-        $tablaActual = null;
-        $columnas = [];
+        $cabecera = fgetcsv($file);
+        if ($cabecera === false) {
+            fclose($file);
+            return false;
+        }
 
-        while (($linea = fgets($file)) !== false) {
-            $linea = trim($linea);
+        while (($fila = fgetcsv($file)) !== false) {
 
-            if ($linea === "") {
-                continue;
-            }
+            [
+                $id,
+                $profesion,
+                $edad,
+                $genero,
+                $pericia,
+                $dispositivo,
+                $tiempo,
+                $completada,
+                $comentariosResultado,
+                $propuestas,
+                $valoracion,
+                $nota,
+                $observaciones
+            ] = $fila;
 
-            if (str_starts_with($linea, "### Tabla:")) {
-                $tablaActual = trim(str_replace("### Tabla:", "", $linea));
-                $columnas = [];
-                continue;
-            }
+            $sqlUsuario = "
+            INSERT INTO usuario (id, profesion, edad, genero, pericia_informatica)
+            VALUES (?, ?, ?, ?, ?)";
 
-            if ($tablaActual && empty($columnas)) {
-                $columnas = str_getcsv($linea);
-                continue;
-            }
+            $stmt = $this->db->prepare($sqlUsuario);
+            $stmt->bind_param("isisi", $id, $profesion, $edad, $genero, $pericia);
+            $stmt->execute();
+            $stmt->close();
 
-            if ($tablaActual && !empty($columnas)) {
-                $valores = str_getcsv($linea);
+            $sqlResultado = "
+            INSERT INTO resultado 
+            (id_usuario, dispositivo, tiempo, completada, comentarios, propuestas, valoracion, nota)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-                $colsSQL = implode(",", $columnas);
-                $placeholders = implode(",", array_fill(0, count($valores), "?"));
+            $stmt = $this->db->prepare($sqlResultado);
+            $stmt->bind_param(
+                "isiissii",
+                $id,
+                $dispositivo,
+                $tiempo,
+                $completada,
+                $comentariosResultado,
+                $propuestas,
+                $valoracion,
+                $nota
+            );
+            $stmt->execute();
+            $stmt->close();
 
-                $sql = "INSERT INTO $tablaActual ($colsSQL) VALUES ($placeholders)";
-                $stmt = $this->db->prepare($sql);
-
-                $tipos = str_repeat("s", count($valores));
-                $stmt->bind_param($tipos, ...$valores);
-
+            if (!empty($observaciones)) {
+                $sqlObs = "
+                INSERT INTO observacion (id_usuario, comentarios)
+                VALUES (?, ?)";
+                $stmt = $this->db->prepare($sqlObs);
+                $stmt->bind_param("is", $id, $observaciones);
                 $stmt->execute();
                 $stmt->close();
             }
