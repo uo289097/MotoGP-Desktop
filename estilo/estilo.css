@@ -47,6 +47,24 @@ h5~img {
     max-width: 650px;
 }
 
+th {
+    background-color: #1e40af;
+    color: #ffffff;
+}
+
+td {
+    background-color: #ffffff;
+    color: #111827;
+}
+
+table {
+    background-color: #f5f7fa;
+}
+
+caption {
+    color: #1f2937;
+}
+
 @media (min-width: 460px) and (max-width: 799px) {
 
     /*Especificidad 001*/
