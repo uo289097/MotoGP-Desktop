@@ -1,5 +1,5 @@
 id,profesion,edad,genero,pericia_informatica,dispositivo,tiempo,completada,comentarios,propuestas,valoracion,nota,observaciones
-1,Estudiante,22,masculino,10,tableta,175,1,La informaciÛn adicional del piloto estarÌa mejor m·s arriba en la p·gina.,Reestructurar el orden de algunas p·ginas para hacerlo m·s intuitivo. Mejorar la presentaciÛn con CSS.,7,9,Lo implementado con JavaScript no funcionaba en la tablet
-2,Fontanero,62,masculino,3,ordenador,524,0,No supe cÛmo ver el n˙mero de vueltas de la carrera.,,7,9,No supo ver cu·ntas vueltas tenÌa la carrera ya que no est· bien redactado en la ayuda.
-3,Profesor,44,femenino,7,movil,180,0,InformaciÛn desorganizada,Organizar mejor la secciÛn del piloto, la informaciÛn tiene un orden un tanto extraÒo. La ayuda no cumple su funciÛn para el circuito.,5,8,Se desesperÛ ya que la informaciÛn de la meteorologÌa tardaba en cargar m·s de lo normal.
-4,Jubilado (Mec·nico),73,masculino,1,movil,737,0,La ayuda est· mal redactada.,La ayuda.,8,8,No supo cargar el archivo del circuito.
+1,Estudiante,22,masculino,10,tableta,175,1,La informaci√≥n adicional del piloto estar√≠a mejor m√°s arriba en la p√°gina.,Reestructurar el orden de algunas p√°ginas para hacerlo m√°s intuitivo. Mejorar la presentaci√≥n con CSS.,7,9,Lo implementado con JavaScript no funcionaba en la tablet
+2,Fontanero,62,masculino,3,ordenador,524,0,No supe c√≥mo ver el n√∫mero de vueltas de la carrera.,,7,9,No supo ver cu√°ntas vueltas ten√≠a la carrera ya que no est√° bien redactado en la ayuda.
+3,Profesor,44,femenino,7,movil,180,0,Informaci√≥n desorganizada,Organizar mejor la secci√≥n del piloto, la informaci√≥n tiene un orden un tanto extra√±o. La ayuda no cumple su funci√≥n para el circuito.,5,8,Se desesper√≥ ya que la informaci√≥n de la meteorolog√≠a tardaba en cargar m√°s de lo normal.
+4,Jubilado (Mec√°nico),73,masculino,1,movil,737,0,La ayuda est√° mal redactada.,La ayuda.,8,8,No supo cargar el archivo del circuito.

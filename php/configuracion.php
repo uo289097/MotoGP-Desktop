@@ -26,6 +26,8 @@ class Configuracion
             die("Conexión fallida al servidor MySQL");
         }
 
+        $this->db->set_charset("utf8mb4");
+
         try {
             $this->db->select_db($this->database);
             $this->connection = true;
@@ -71,6 +73,7 @@ class Configuracion
 
         $filepath = $dir . $filename;
         $file = fopen($filepath, "w");
+        fwrite($file, "\xEF\xBB\xBF"); // BOM UTF-8
 
         $headers = [
             "id",
