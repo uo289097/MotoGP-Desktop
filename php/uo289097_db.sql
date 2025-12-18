@@ -6,7 +6,7 @@
 -- Tiempo de generación: 01-12-2025 a las 10:12:10
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
-CREATE DATABASE IF NOT EXISTS uo289097_db;
+CREATE DATABASE IF NOT EXISTS uo289097_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE uo289097_db;
 
 
