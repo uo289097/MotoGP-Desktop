@@ -1,0 +1,8 @@
+﻿id,profesion,edad,genero,pericia_informatica,dispositivo,tiempo,completada,comentarios,propuestas,valoracion,nota,observaciones
+1,Estudiante,22,masculino,10,tableta,175,1,"La información adicional del piloto estaría mejor más arriba en la página.","Reestructurar el orden de algunas páginas para hacerlo más intuitivo. Mejorar la presentación con CSS.",7,9,"Lo implementado con JavaScript no funcionaba en la tablet"
+2,Fontanero,62,masculino,3,ordenador,524,0,"No supe cómo ver el número de vueltas de la carrera.",,7,9,"No supo ver cuántas vueltas tenía la carrera ya que no está bien redactado en la ayuda."
+3,Profesor,44,femenino,7,movil,180,0,"Información desorganizada",,0,5,8
+4,"Jubilado (Mecánico)",73,masculino,1,tableta,737,0,"La ayuda no ayuda.","La ayuda.",8,8,"No supo cargar el archivo del circuito."
+5,Matemático,27,masculino,8,tableta,153,1,,,10,10,
+6,Electricista,63,masculino,5,movil,204,1,,,10,10,
+7,Administrativa,52,femenino,6,ordenador,157,1,,"El aspecto de la tabla de los resultados",9,10,

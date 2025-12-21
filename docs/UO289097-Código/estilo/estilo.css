@@ -1,0 +1,109 @@
+/* Datos personales: Gabriel García Martínez, UO289097 */
+/* Estilos generales del proyecto MotoGP Desktop */
+
+/* Especificidad: 001 */
+body {
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+    background-color: #F5F2E7;
+    color: #222222;
+}
+
+/* Especificidad 001*/
+header {
+    background-color: #512d10;
+    color: #FFFFFF;
+    /* No hay problema en la herencia de colores */
+}
+
+/* Especificidad 002 */
+header a {
+    /* No hay problema en la herencia de colores */
+    color: #FFFFFF;
+    text-decoration-line: overline;
+}
+
+/* Especificidad 012 */
+header a:hover {
+    text-decoration-line: underline;
+    font-size: 1.2em;
+}
+
+/* Especificidad 012 */
+nav a.active {
+    /* No hay problema en la herencia de colores */
+    color: #0ec1c0;
+}
+
+/* Especificidad 002*/
+header+p {
+    font-size: 0.85em;
+}
+
+/* Especificidad 002*/
+h5~img {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 650px;
+}
+
+/* Especificidad 001*/
+th {
+    background-color: #1e40af;
+    color: #ffffff;
+}
+
+/* Especificidad 001*/
+td {
+    background-color: #ffffff;
+    color: #111827;
+}
+
+/* Especificidad 001*/
+table {
+    /* No hay problema en la herencia de colores */
+    background-color: #f5f7fa;
+}
+
+/* Especificidad 001*/
+caption {
+    /* No hay problema en la herencia de colores */
+    color: #1f2937;
+}
+
+@media (min-width: 460px) and (max-width: 799px) {
+
+    /*Especificidad 001*/
+    video {
+        width: 100%;
+        height: auto;
+    }
+
+    /*Especificidad 001*/
+    audio {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 459px) {
+
+    /* Especificidad 002*/
+    header+p {
+        display: none;
+    }
+
+    /* Especificidad 001*/
+    video {
+        /* Se produce advertencia por redefinición en media query */
+        width: 100%;
+        /* Se produce advertencia por redefinición en media query */
+        height: auto;
+    }
+
+    /* Especificidad 001*/
+    audio {
+        /* Se produce advertencia por redefinición en media query */
+        width: 100%;
+    }
+}
