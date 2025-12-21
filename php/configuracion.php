@@ -73,7 +73,7 @@ class Configuracion
 
         $filepath = $dir . $filename;
         $file = fopen($filepath, "w");
-        fwrite($file, "\xEF\xBB\xBF"); // BOM UTF-8
+        fwrite($file, "\xEF\xBB\xBF");
 
         $headers = [
             "id",
@@ -93,7 +93,6 @@ class Configuracion
 
         fputcsv($file, $headers);
 
-        // Consulta unificada
         $sql = "SELECT 
             u.id,
             u.profesion,
@@ -149,7 +148,6 @@ class Configuracion
             return false;
         }
 
-        // Sentencia preparada para evitar SQL Injection
         $stmt = $this->db->prepare("
             INSERT INTO usuario (profesion, edad, genero, pericia_informatica)
             VALUES (?, ?, ?, ?)");
@@ -321,15 +319,13 @@ class Configuracion
             $stmt->execute();
             $stmt->close();
 
-            if (!empty($observaciones)) {
-                $sqlObs = "
+            $sqlObs = "
                 INSERT INTO observacion (id_usuario, comentarios)
                 VALUES (?, ?)";
-                $stmt = $this->db->prepare($sqlObs);
-                $stmt->bind_param("is", $id, $observaciones);
-                $stmt->execute();
-                $stmt->close();
-            }
+            $stmt = $this->db->prepare($sqlObs);
+            $stmt->bind_param("is", $id, $observaciones);
+            $stmt->execute();
+            $stmt->close();
         }
 
         fclose($file);

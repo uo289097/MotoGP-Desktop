@@ -13,6 +13,7 @@ main>h2 {
     grid-column: 1 / -1;
     text-align: center;
     font-size: 1.8em;
+    /* No hay problema en la herencia de colores */
     color: black;
     margin: 0.5em 0 1.5em 0;
 }

@@ -17,9 +17,9 @@ header {
 
 /* Especificidad 002 */
 header a {
+    /* No hay problema en la herencia de colores */
     color: #FFFFFF;
     text-decoration-line: overline;
-    /* No hay problema en la herencia de colores */
 }
 
 /* Especificidad 012 */
@@ -30,8 +30,8 @@ header a:hover {
 
 /* Especificidad 012 */
 nav a.active {
-    color: #0ec1c0;
     /* No hay problema en la herencia de colores */
+    color: #0ec1c0;
 }
 
 /* Especificidad 002*/
@@ -47,21 +47,27 @@ h5~img {
     max-width: 650px;
 }
 
+/* Especificidad 001*/
 th {
     background-color: #1e40af;
     color: #ffffff;
 }
 
+/* Especificidad 001*/
 td {
     background-color: #ffffff;
     color: #111827;
 }
 
+/* Especificidad 001*/
 table {
+    /* No hay problema en la herencia de colores */
     background-color: #f5f7fa;
 }
 
+/* Especificidad 001*/
 caption {
+    /* No hay problema en la herencia de colores */
     color: #1f2937;
 }
 

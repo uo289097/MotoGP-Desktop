@@ -34,6 +34,7 @@ article img {
     height: 100%;
     position: absolute;
     border-radius: 0.5em;
+    /* No hay problema en la herencia de colores */
     background: #1C7CCC;
     backface-visibility: hidden;
 }
